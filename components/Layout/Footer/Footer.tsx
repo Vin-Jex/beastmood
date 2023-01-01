@@ -78,7 +78,7 @@ const footerLinks: FooterLinks = {
 
 const Footer = () => {
   return (
-    <footer className='pt-10 px-4 md:px-12 flex flex-col space-y-12 divide-y divide-blue-300 font-montserrat container mx-auto my-auto'>
+    <footer className='pt-10 px-4 md:px-12 flex flex-col space-y-12 divide-y divide-dark font-montserrat container mx-auto my-auto'>
       <div className='flex flex-col justify-center'>
         <div className='cursor-pointer w-fit'>
           <Link href='/'>
@@ -88,22 +88,22 @@ const Footer = () => {
 
         <div className='grid grid-cols-1 lg:grid-cols-11 w-full justify-evenly items-start'>
           <div className='col-span-4 flex flex-col space-y-6 w-full py-6 justify-start'>
-            <span className='text-dark text-base sm:text-lg'>
+            <span className='text-dark text-base sm:text-[1rem]'>
               Join our newsletter to stay up to date on features and releases.
             </span>
 
             <form className='flex space-x-3 w-full'>
               <input
                 type='text'
-                className='bg-light text-dark placeholder:text-lg font-montserrat p-3 md:p-4 w-full border-2 border-dark focus:outline-none'
+                className='bg-light text-dark placeholder:text-base font-montserrat p-3 md:p-4 w-full border-2 border-dark focus:outline-none'
                 placeholder='Enter your email'
               />
-              <button className='border-2 border-dark text-dark py-2 md:py-4 px-4 md:px-10'>
+              <button className='border-2 border-dark text-dark py-2 md:py-4 px-4 md:px-8'>
                 Subscribe
               </button>
             </form>
 
-            <Link href='/' className='text-dark underline underline-offset-2'>
+            <Link href='/' className='text-dark underline underline-offset-2 text-sm'>
               By subscribing you agree to with our Privacy Policy and provide
               consent to receive updates from our company.
             </Link>
@@ -112,16 +112,16 @@ const Footer = () => {
           <div className='col-span-7 w-full h-full px-0 lg:px-20 flex flex-col sm:flex-row space-y-8 sm:space-y-0 justify-between '>
             <div className='flex space-x-10'>
               <ul className='flex flex-col'>
-                <li className='text-xl text-dark/90 font-bold capitalize whitespace-nowrap mb-2'>
+                <li className='text-lg text-dark/90 font-bold capitalize whitespace-nowrap mb-2'>
                   Connect with us
                 </li>
                 {footerLinks?.connect?.map(({ text, link }, index) => {
                   return (
                     <li
-                      className='text-base text-dark/90 font-medium capitalize my-1'
+                      className='text-sm text-dark/90 font-medium capitalize my-1'
                       key={index}
                     >
-                      <Link href={link} className='text-lg'>
+                      <Link href={link} className='text-[1rem]'>
                         {text}
                       </Link>
                     </li>
@@ -129,16 +129,16 @@ const Footer = () => {
                 })}
               </ul>
               <ul className='flex flex-col'>
-                <li className='text-xl text-dark/90 font-bold capitalize whitespace-nowrap mb-2'>
+                <li className='text-lg text-dark/90 font-bold capitalize whitespace-nowrap mb-2'>
                   about
                 </li>
                 {footerLinks?.about?.map(({ text, link }, index) => {
                   return (
                     <li
-                      className='text-base text-dark/90 font-medium capitalize my-1'
+                      className='text-[.9rem] text-dark/90 font-medium capitalize my-1'
                       key={index}
                     >
-                      <Link href={link} className='text-lg'>
+                      <Link href={link} className='text-[1rem]'>
                         {text}
                       </Link>
                     </li>
@@ -149,19 +149,19 @@ const Footer = () => {
 
             <div className=''>
               <ul className='flex flex-col'>
-                <li className='text-xl text-dark/90 font-bold capitalize whitespace-nowrap mb-2'>
+                <li className='text-lg text-dark/90 font-bold capitalize whitespace-nowrap mb-2'>
                   follow us
                 </li>
                 {footerLinks.socials.map(
                   ({ text, link, icon: Icon }, index) => {
                     return (
                       <li
-                        className=' flex text-base text-dark font-medium capitalize my-1'
+                        className=' flex text-[1rem] text-dark font-medium capitalize my-1'
                         key={index}
                       >
                         <Link
                           href={link}
-                          className='text-lg space-x-4 flex items-center'
+                          className='text-[1rem] space-x-4 flex items-center'
                         >
                           <Icon className='mr-4' />
                           {text}
@@ -175,19 +175,19 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className='w-full flex flex-col-reverse sm:flex-row justify-between px-0 md:px-14 py-4 sm:py-10'>
+      <div className='w-full flex flex-col-reverse sm:flex-row justify-between px-0 md:px-5 py-4 sm:py-6'>
         <span className='text-dark text-base sm:text-base my-2 sm:my-0'>
           &copy; {new Date().getFullYear()}, All rights reserved
         </span>
 
         <div className='flex gap-x-8'>
-          <span className='text-dark text-base md:text-lg underline underline-offset-2'>
+          <span className='text-dark text-base underline underline-offset-4'>
             Privacy Policy
           </span>
-          <span className='text-dark text-base md:text-lg underline underline-offset-2'>
+          <span className='text-dark text-base underline underline-offset-4'>
             Term of Service
           </span>
-          <span className='text-dark text-base md:text-lg underline underline-offset-2'>
+          <span className='text-dark text-base underline underline-offset-4'>
             Cookies Settings
           </span>
         </div>
