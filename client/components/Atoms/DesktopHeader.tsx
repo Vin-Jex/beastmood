@@ -123,14 +123,12 @@ export default function DesktopHeader() {
                     className={`theme-btn__icon ${
                       addAnimate ? "animated" : ""
                     }`}
-                    sx={{ fontSize: "2rem", color: "rgb(107 33 168)" }}
                   />
                 ) : (
                   <ModeNight
                     className={`theme-btn__icon ${
                       addAnimate ? "animated" : ""
                     }`}
-                    sx={{ fontSize: "2rem", color: "purple" }}
                   />
                 )}
               </div>
