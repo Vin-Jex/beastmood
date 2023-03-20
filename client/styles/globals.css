@@ -204,7 +204,7 @@
 }
 
 .theme-btn__icon {
-  @apply text-[#f1d04d] text-[.7rem] md:text-xl;
+  @apply text-[#f1d04d] text-[1rem] md:text-xl !p-1;
 }
 
 /* -------------- ANIMATION ------------ */
@@ -232,5 +232,5 @@ html.dark {
 }
 
 .dark .theme-btn__icon {
-  @apply text-main-brand text-[.7rem] md:text-xl;
+  @apply text-main-brand text-[1rem] md:text-xl !p-1;
 }
