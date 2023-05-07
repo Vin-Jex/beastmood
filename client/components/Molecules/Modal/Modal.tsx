@@ -47,22 +47,22 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, modalWidth, child
 
   return (
     <>
-      <div className='fixed inset-0 flex items-start justify-center m-32'>
+      <div className='fixed inset-0 flex items-start justify-center my-32 mx-4'>
         <div className='fixed inset-0 bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm'></div>
         <div
           ref={modalRef}
-          className={`relative bg-white rounded-lg shadow-lg dark:bg-main-brand w-full`}
+          className={`relative bg-gray-100 rounded-lg shadow-lg dark:bg-dark w-full`}
           style={{ width: modalWidth }}
         >
           <button
             type='button'
-            className='absolute top-3 right-4 text-white bg-transparent text-xl ml-auto'
+            className='absolute top-3 right-6 text-dark dark:text-light bg-transparent text-2xl ml-auto'
             onClick={onClose}
           >
             &times;
           </button>
           <div className='px-6 py-3 border-b rounded-t dark:border-gray-600'>
-            <h3 className='text-lg text-white'>
+            <h3 className='text-lg text-dark dark:text-white'>
               {title}
             </h3>
           </div>
