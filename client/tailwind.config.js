@@ -7,8 +7,12 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: "class",
   theme: {
     extend: {
+      animation: {
+        "spin-slow": "spin 0.5s",
+      },
       fontFamily: {
         sans: ["Montserrat", "sans-serif"],
       },
@@ -24,6 +28,7 @@ module.exports = {
         "main2-brand": "#FFD64E",
         "dark2-brand": "#FAA600",
         "light2-brand": "#FFDF75",
+        darkGray: "#ffffffb0",
         dark: "#3A3A3C",
         dark2: "#6B7588",
         dark3: "#8F90A6",
