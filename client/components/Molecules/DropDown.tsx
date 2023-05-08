@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTheme } from "next-themes";
 
 export interface DropdownOption {
   label: string;
@@ -10,10 +11,7 @@ interface CustomDropdownProps {
   defaultLabel: string;
 }
 
-const Dropdown: React.FC<CustomDropdownProps> = ({
-  options,
-  defaultLabel,
-}) => {
+const Dropdown: React.FC<CustomDropdownProps> = ({ options, defaultLabel }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<DropdownOption | null>(
     null
