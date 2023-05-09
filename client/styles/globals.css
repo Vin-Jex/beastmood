@@ -59,7 +59,175 @@
     @apply flex items-center justify-center w-full rounded-md p-3;
   }
 
-  .menuItems {
-    @apply flex items-center space-x-4 text-[1.1rem] py-3 capitalize;
+  .btn-2 {
+    @apply text-center p-3 md:p-4 rounded-md;
   }
+
+  .banner-btn button {
+    @apply inline-block py-3 md:py-4 relative z-10 transition-colors duration-[0.5s];
+  }
+  .banner-btn button span {
+    @apply w-0 h-full absolute top-0 left-0 -z-10 duration-500;
+  }
+  .banner-btn button:hover span {
+    @apply w-full;
+  }
+
+  .menuItems {
+    @apply flex items-center space-x-4 text-[1.1rem] py-4 capitalize;
+  }
+
+  .header {
+    @apply flex items-center justify-between pb-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-1 after:bg-gradient-to-r after:from-[#FF5E03] after:to-[#FFD64E];
+  }
+
+  .header div {
+    @apply flex flex-col;
+  }
+
+  .header div > span {
+    @apply text-[1.1rem] md:text-[1.7rem] text-[#000000] dark:text-[#fff] capitalize font-[Montserrat] font-medium leading-7;
+  }
+
+  .header div > p {
+    @apply text-[.7rem] md:text-[.9rem] text-[#000000]/60 dark:text-darkGray;
+  }
+
+  .header button {
+    @apply bg-transparent md:bg-main-brand text-[.6rem] md:text-base text-main-brand md:text-white uppercase whitespace-nowrap p-1 md:p-3 flex items-center justify-center gap-2;
+  }
+
+  .card {
+    @apply flex flex-col gap-3 font-[Montserrat];
+  }
+
+  .card-container img {
+    @apply w-[80%] sm:w-[190px] h-[226px] shrink-0 rounded-md;
+  }
+
+  .card-container div > span {
+    @apply text-black dark:text-[#FFF]  font-bold text-lg capitalize;
+  }
+
+  .card-container div > p {
+    @apply text-black/40 dark:text-darkGray font-normal text-sm leading-3;
+  }
+
+  .card-container span {
+    @apply leading-5 text-black/70 dark:text-white/90 text-base capitalize;
+  }
+
+  .card-container2 {
+    @apply !justify-self-stretch !justify-items-start;
+  }
+
+  .card-container2 img {
+    @apply w-[236px] xl:w-[236px] h-[143px] shrink-0 rounded-md;
+  }
+
+  .card-container2 div > span {
+    @apply text-black dark:text-[#FFF] font-bold text-lg capitalize;
+  }
+
+  .card-container2 div > p {
+    @apply text-black/40 dark:text-darkGray font-normal text-sm;
+  }
+
+  .card-container2 span {
+    @apply leading-5 text-black/60 dark:text-white/90 text-base capitalize;
+  }
+
+  .specials-active {
+    @apply after:duration-500 after:transition after:-mb-1 md:after:-mb-2 relative after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-6
+        md:after:w-10 after:h-1 after:bg-gradient-to-r after:from-[#FF5E03]
+        after:to-[#FFD64E];
+  }
+
+  .specials-nav {
+    @apply flex flex-row lg:flex-col items-center justify-center space-x-2 lg:space-y-8 mb-8 lg:mb-0;
+  }
+
+  .specials-nav li {
+    @apply inline-flex items-center justify-between space-x-1 md:space-x-2 lg:w-[11.4rem];
+  }
+
+  .specials-nav li p {
+    @apply text-black dark:text-white text-[.85rem] md:text-[1rem] lg:text-[1.2rem] leading-[21.017px] font-[Montserrat] font-medium capitalize whitespace-nowrap;
+  }
+
+  .specials-nav li .icon {
+    @apply text-[.7rem];
+  }
+
+  .specials-nav li.specials-active .icon {
+    @apply text-main-brand dark:text-main2-brand;
+  }
+
+  .rating {
+    @apply flex items-center justify-center border-2 border-dark dark:border-light  hover:border-main2-brand dark:hover:border-main2-brand  hover:bg-main2-brand rounded-md text-dark dark:text-light dark:hover:text-dark text-center capitalize mt-16 w-fit xl:w-36 whitespace-nowrap py-3 px-4 xl:py-4 transition duration-500
+  }
+
+  .rating * {
+    @apply bg-main2-brand text-dark rounded-full p-1 text-xl ml-4
+  }
+
+  .rating:hover * {
+    @apply bg-dark text-white
+  }
+
+  
+}
+
+/* Swiper JS */
+
+.swiper-pagination-bullet-active {
+  @apply !bg-gradient-to-r from-[#FF5E03] to-[#FFD64E] !rounded-[10px] !w-[120px];
+}
+
+.swiper-pagination-clickable .swiper-pagination-bullet {
+  @apply !bg-black/80 dark:!bg-white;
+}
+
+.theme-btn {
+  @apply bg-white w-12 h-7 md:w-14 md:h-8 rounded-full px-1 py-1 shadow-[inset_0_8px_60px_rgba(0,0,0,.1),_inset_0_8px_8px_rgba(0,0,0,.1),_inset_0_-4px_4px_rgba(0,0,0,.1)] relative flex items-center cursor-pointer;
+}
+
+.theme-btn__indicator {
+  @apply bg-white w-[1.4rem] h-[1.4rem] md:w-[1.8rem] md:h-[1.8rem] rounded-full absolute shadow-[0_8px_40px_rgba(0,0,0,.2)] transition-transform duration-300 ease-in;
+}
+
+.theme-btn__icon-container {
+  @apply w-full h-full flex justify-center items-center;
+}
+
+.theme-btn__icon {
+  @apply text-[#f1d04d] text-sm md:text-xl;
+}
+
+/* -------------- ANIMATION ------------ */
+.theme-btn__icon.animated {
+  @apply animate-spin-slow;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* -------------- DARKMODE -------------- */
+html.dark {
+  @apply bg-[#000000];
+}
+
+.dark .theme-btn {
+  @apply shadow-[inset_0_8px_60px_rgba(0,0,0,.2),_inset_8px_0_8px_rgba(0,0,0,.2),_inset_0_-4px_4px_rgba(0,0,0,.2)] inset-x-0;
+}
+
+.dark .theme-btn__indicator {
+  @apply transform translate-x-[1.17rem] md:translate-x-[1.3rem] bg-[#2b2b2b] shadow-[0_8px_40px_rgba(0,0,0,.3)];
+}
+
+.dark .theme-btn__icon {
+  @apply text-main-brand text-sm md:text-xl;
 }
