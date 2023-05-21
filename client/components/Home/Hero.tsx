@@ -33,7 +33,7 @@ export default function Hero() {
             />
 
             <div
-              className={`flex flex-col justify-center h-screen z-10 p-8 md:p-16 gap-12`}
+              className={`flex flex-col justify-center h-screen z-10 p-8 md:p-16 gap-12 bg-gradient-to-r from-[#000000] to-[#D9D9D900]`}
             >
               <div className='text-[1.7rem] sm:text-[2.5rem] md:text-[3.3rem] font-bold font-[Montserrat] text-white md:leading-[4.4rem] flex flex-col space-y-1 md:space-y-3'>
                 <span className='w-[10em]'>

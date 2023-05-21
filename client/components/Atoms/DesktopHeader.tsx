@@ -93,7 +93,7 @@ export default function DesktopHeader() {
             className='inline-block items-center cursor-pointer leading-5 px-5 capitalize text-base xl:text-lg'
             onClick={handleBrowse}
           >
-            Browse <ArrowDropDown fontSize='medium' />
+            category <ArrowDropDown />
           </li>
           {navItems.map((navItem, index) => {
             return (
