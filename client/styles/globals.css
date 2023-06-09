@@ -200,11 +200,11 @@
 }
 
 .theme-btn__icon-container {
-  @apply w-full h-full flex justify-center items-center;
+  @apply w-full h-full flex justify-center items-center p-2;
 }
 
 .theme-btn__icon {
-  @apply text-[#f1d04d] text-sm md:text-xl;
+  @apply text-[#f1d04d] text-[.7rem] md:text-xl;
 }
 
 /* -------------- ANIMATION ------------ */
@@ -232,5 +232,5 @@ html.dark {
 }
 
 .dark .theme-btn__icon {
-  @apply text-main-brand text-sm md:text-xl;
+  @apply text-main-brand text-[.7rem] md:text-xl;
 }
