@@ -1,0 +1,30 @@
+{
+  "name": "beastmode",
+  "version": "1.0.0",
+  "description": "Server side for beastmode web manga application",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js",
+    "build": "babel src -d dist"
+  },
+  "repository": "https://github.com/Zeeohn/beastmode.git",
+  "author": "Zeeohn <successzion21@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/cli": "^7.22.5",
+    "@babel/core": "^7.22.5",
+    "@babel/node": "^7.22.5",
+    "@babel/preset-env": "^7.22.5",
+    "argon2": "^0.30.3",
+    "axios": "^1.4.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "list_end_points": "^2.0.6",
+    "mongoose": "^7.3.1",
+    "morgan": "^1.10.0",
+    "nodemailer": "^6.9.3",
+    "nodemon": "^2.0.22"
+  }
+}
