@@ -9,6 +9,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["Montserrat", "sans-serif"],
+      },
       colors: {
         error: "#FF3B3B",
         warning: "#FFCC00",
@@ -20,12 +23,12 @@ module.exports = {
         "subtle-brand": "#FF5E0342",
         "main2-brand": "#FFD64E",
         "dark2-brand": "#FAA600",
-        "light2-brand": "##FFDF75",
+        "light2-brand": "#FFDF75",
         dark: "#3A3A3C",
         dark2: "#6B7588",
         dark3: "#8F90A6",
         dark4: "#C7C9D9",
-        light: "#DDE5E9",
+        light: "#ffffff",
         light2: "#EBEBF0",
         light3: "#F2F2F5",
         light4: "#FAFAFC",

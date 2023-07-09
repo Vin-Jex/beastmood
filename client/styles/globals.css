@@ -2,6 +2,64 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply font-['Montserrat'_sans-serif];
+@layer base {
+  body {
+    @apply font-['Montserrat'_sans-serif];
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+@layer components {
+  .bg {
+    @apply bg-[url("../components/images/auth.png")];
+  }
+
+  .customCheckbox {
+    @apply flex items-center;
+  }
+
+  .customCheckbox label {
+    @apply flex cursor-pointer;
+  }
+
+  .customCheckbox input[type="checkbox"] {
+    @apply cursor-pointer opacity-0 absolute;
+  }
+
+  .customCheckbox label::before {
+    @apply content-[''] w-[1.4em] h-[1.4em] rounded-[0.15em] mr-[0.5em] border-solid border-[0.05em] border-black;
+  }
+
+  .customCheckbox label:hover::before,
+  .customCheckbox input[type="checkbox"]:hover + label::before {
+    @apply bg-main-brand/20;
+  }
+
+  .customCheckbox input[type="checkbox"]:focus + label::before {
+    @apply shadow-[0_0_20_black];
+  }
+
+  .customCheckbox input[type="checkbox"]:disabled + label,
+  .customCheckbox input[type="checkbox"]:disabled {
+    @apply cursor-default text-[#aaa];
+  }
+
+  .customCheckbox input[type="checkbox"]:checked + label::before {
+    @apply flex items-center justify-center bg-main-brand text-white content-['\002714'];
+  }
+
+  .customCheckbox input[type="checkbox"]:disabled + label::before {
+    @apply bg-[#ccc] border-[#999];
+  }
+
+  .btn {
+    @apply flex items-center justify-center w-full rounded-md p-3;
+  }
+
+  .menuItems {
+    @apply flex items-center space-x-4 text-[1.1rem] py-3 capitalize;
+  }
 }
