@@ -99,23 +99,27 @@
   }
 
   .card {
-    @apply flex flex-col gap-3 font-[Montserrat];
+    @apply flex flex-col items-center gap-3 font-[Montserrat];
   }
 
   .card-container img {
     @apply w-[80%] sm:w-[190px] h-[226px] shrink-0 rounded-md;
   }
 
+  .card-container div {
+    @apply flex flex-col justify-self-start w-[80%] sm:w-[190px];
+  }
+
   .card-container div > span {
-    @apply text-black dark:text-[#FFF]  font-bold text-lg capitalize;
+    @apply text-black dark:text-[#FFF] font-bold text-lg capitalize;
   }
 
   .card-container div > p {
     @apply text-black/40 dark:text-darkGray font-normal text-sm leading-3;
   }
 
-  .card-container span {
-    @apply leading-5 text-black/70 dark:text-white/90 text-base capitalize;
+  .card-container > span {
+    @apply leading-5 text-black/70 dark:text-white/90 text-base ml-0 w-[80%] sm:w-[190px] capitalize;
   }
 
   .card-container2 {
@@ -165,18 +169,16 @@
   }
 
   .rating {
-    @apply flex items-center justify-center border-2 border-dark dark:border-light  hover:border-main2-brand dark:hover:border-main2-brand  hover:bg-main2-brand rounded-md text-dark dark:text-light dark:hover:text-dark text-center capitalize mt-16 w-fit xl:w-36 whitespace-nowrap py-3 px-4 xl:py-4 transition duration-500
+    @apply flex items-center justify-center border-2 border-dark dark:border-light  hover:border-main2-brand dark:hover:border-main2-brand  hover:bg-main2-brand rounded-md text-dark dark:text-light dark:hover:text-dark text-center capitalize mt-16 w-fit xl:w-36 whitespace-nowrap py-3 px-4 xl:py-4 transition duration-500;
   }
 
   .rating * {
-    @apply bg-main2-brand text-dark rounded-full p-1 text-xl ml-4
+    @apply bg-main2-brand text-dark rounded-full p-1 text-xl ml-4;
   }
 
   .rating:hover * {
-    @apply bg-dark text-white
+    @apply bg-dark text-white;
   }
-
-  
 }
 
 /* Swiper JS */
