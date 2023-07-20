@@ -95,10 +95,10 @@ const Footer = () => {
             <form className='flex space-x-3 w-full'>
               <input
                 type='text'
-                className='bg-light text-dark placeholder:text-lg font-[Montserrat] p-4 w-full border-2 border-dark focus:outline-none'
+                className='bg-light text-dark placeholder:text-lg font-[Montserrat] p-3 md:p-4 w-full border-2 border-dark focus:outline-none'
                 placeholder='Enter your email'
               />
-              <button className='border-2 border-dark text-dark py-4 px-10'>
+              <button className='border-2 border-dark text-dark py-2 md:py-4 px-4 md:px-10'>
                 Subscribe
               </button>
             </form>
@@ -109,7 +109,7 @@ const Footer = () => {
             </Link>
           </div>
 
-          <div className='col-span-7 w-full h-full px-0 lg:px-20 flex justify-between '>
+          <div className='col-span-7 w-full h-full px-0 lg:px-20 flex flex-col sm:flex-row space-y-8 sm:space-y-0 justify-between '>
             <div className='flex space-x-10'>
               <ul className='flex flex-col'>
                 <li className='text-xl text-dark/90 font-bold capitalize whitespace-nowrap mb-2'>

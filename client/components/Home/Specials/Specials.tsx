@@ -103,7 +103,7 @@ export default function Specials() {
               <span>Genre | Sub</span>
             </div>
           </div>
-          <button className='p-3 md:p-4 rounded-md text-base text-center text-white bg-gradient-to-r from-[#FF5E03] to-[#FFD64E] w-[65%] md:w-full'>
+          <button className='p-3 md:p-4 rounded-md text-base text-center text-white bg-gradient-to-r from-[#FF5E03] to-[#FFD64E] w-[89%] md:w-full'>
             See More
           </button>
         </div>

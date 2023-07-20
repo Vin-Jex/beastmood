@@ -268,7 +268,7 @@ export const MobileMenuDropdowns: React.FC<MobileMenuType> = ({
           title='Search'
           modalWidth='60rem'
         >
-          <form action='' className='flex overflow-hidden'>
+          <form className='flex overflow-hidden'>
             <input
               type='search'
               name='search'
