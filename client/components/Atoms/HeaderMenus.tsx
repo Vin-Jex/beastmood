@@ -345,14 +345,12 @@ export const MobileMenuDropdowns: React.FC<MobileMenuType> = ({
                     className={`theme-btn__icon ${
                       addAnimate ? "animated" : ""
                     }`}
-                    sx={{ fontSize: "2rem", color: "rgb(107, 33, 168)" }}
                   />
                 ) : (
                   <ModeNight
                     className={`theme-btn__icon ${
                       addAnimate ? "animated" : ""
                     }`}
-                    sx={{ fontSize: "2rem", color: "purple" }}
                   />
                 )}
               </div>
