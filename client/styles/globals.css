@@ -9,6 +9,7 @@
 
   * {
     box-sizing: border-box;
+    scroll-behavior: smooth;
   }
 }
 
@@ -118,11 +119,11 @@
   }
 
   .card-container2 {
-    @apply !justify-self-stretch !justify-items-start;
+    @apply flex flex-nowrap items-center !justify-self-stretch !justify-items-start w-full sm:w-auto;
   }
 
   .card-container2 img {
-    @apply w-[236px] xl:w-[236px] h-[143px] shrink-0 rounded-md;
+    @apply w-[89%] h-[220px] sm:w-[236px] xl:w-[236px] sm:h-[143px] shrink-0 rounded-md object-cover;
   }
 
   .card-container2 div > span {

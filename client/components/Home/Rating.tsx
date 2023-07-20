@@ -6,9 +6,9 @@ import { ArrowForward } from "@mui/icons-material";
 
 const Rating = () => {
   return (
-    <div className='grid grid-cols-1 lg:grid-cols-5 place-items-center place-content-center p-4 xl:p-14 my-2 md:my-5 font-[Montserrat] space-y-16 lg:space-y-0 lg:space-x-32'>
+    <div className='grid grid-cols-1 lg:grid-cols-5 place-items-center place-content-center p-4 xl:p-14 my-2 md:my-5 font-[Montserrat] space-y-16'>
       <div className='flex flex-col w-full col-span-1 px-4 justify-center items-center'>
-        <div className="w-full flex flex-col justify-center">
+        <div className='w-full flex flex-col justify-center'>
           <Image src={Img} alt='Avater' className='w-[12em] !mb-3 mx-auto' />
           <span className='text-dark dark:text-light text-lg md:text-xl xl:text-2xl text-center font-medium capitalize'>
             Top Rated Manga
@@ -24,7 +24,7 @@ const Rating = () => {
         </button>
       </div>
 
-      <div className='col-span-2 lg:col-span-4 w-full flex flex-row flex-wrap sm:flex-nowrap gap-y-20 sm:gap-y-0 justify-evenly items-center'>
+      <div className='col-span-2 lg:col-span-4 w-full flex flex-row flex-wrap sm:flex-nowrap gap-y-20 sm:gap-y-0 justify-evenly items-center ml-0 lg:ml-32'>
         <div className='px-4 py-2 flex flex-col w-full'>
           <span className='text-dark dark:text-light text-xl capitalize mb-8'>
             Weekly ranking

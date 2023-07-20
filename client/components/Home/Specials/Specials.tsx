@@ -21,7 +21,7 @@ export default function Specials() {
         </div>
 
         <div className='col-span-5 flex flex-col items-center justify-center'>
-          <div className='flex flex-wrap items-center justify-center lg:justify-start gap-x-6 xl:gap-x-8 gap-y-8 xl:gap-y-20 w-full mb-8'>
+          <div className='flex flex-wrap items-center justify-center lg:justify-start gap-x-2 xl:gap-x-8 gap-y-8 xl:gap-y-20 w-full mb-8'>
             <div className='card card-container2'>
               <Image src={image} alt='kimitsu no yaiba' />
 

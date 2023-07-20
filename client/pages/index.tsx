@@ -15,6 +15,9 @@ import Rating from "@/components/Home/Rating";
 import Features from "@/components/Home/Features";
 import Meta from "@/components/Meta";
 import Populate from "@/components/Home/Populate";
+import Subscricbe from "@/components/Home/Subscribe";
+import Headlines from "@/components/Home/Headlines";
+import Footer from "@/components/Home/Footer";
 
 const images = [Img1, Img2, Img3];
 
@@ -28,6 +31,9 @@ export default function Home() {
       <Rating />
       <Features />
       <Populate />
+      <Subscricbe />
+      <Headlines />
+      <Footer />
       {/* <ThemeSwitch /> */}
     </main>
   );

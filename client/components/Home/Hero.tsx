@@ -14,7 +14,7 @@ const images = [Img1, Img2, Img3, Img4, Img5];
 
 export default function Hero() {
   return (
-    <div className='bg-blue-100 relative'>
+    <div className='bg-blue-100 relative w-full'>
       <Swiper
         spaceBetween={0}
         centeredSlides={true}

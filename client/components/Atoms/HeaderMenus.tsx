@@ -192,12 +192,7 @@ export const DesktopMenuDropdowns: React.FC<DesktopMenuType> = ({
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <div className='flex items-center space-x-3 px-4 pt-4 pb-6'>
-          <span className='border w-10 h-10 rounded-full overflow-hidden'>
-            <Image className='object-cover ' src={ProfileImage} alt='Profile' />
-          </span>
-          <p className='text-[1.2rem] my-auto text-white'>Beastmood</p>
-        </div>
+
 
         {accountMenuData.map(({ text, icon: Icon }, index) => {
           return (
@@ -208,7 +203,6 @@ export const DesktopMenuDropdowns: React.FC<DesktopMenuType> = ({
                 text === "history" || text === "my account" ? "!mb-4" : ""
               }`}
             >
-              <Icon />
               <span>{text}</span>
             </MenuItem>
           );
