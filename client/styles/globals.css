@@ -14,9 +14,9 @@
 }
 
 @layer components {
-  .bg {
-    @apply bg-[url("../components/images/auth.png")];
-  }
+  /* .bg {
+    @apply bg-[url(../public/images/auth.png)];
+  } */
 
   .customCheckbox {
     @apply flex items-center;
