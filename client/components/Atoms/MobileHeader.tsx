@@ -78,6 +78,7 @@ export default function MobileHeader() {
               isModalOpen={isModalOpen}
               browseMenu={browse}
               isBrowseOpen={isBrowseOpen}
+              handleOpenMenu={handleOpenMenu}
               handleCloseBrowse={handleCloseBrowse}
             />
           </div>

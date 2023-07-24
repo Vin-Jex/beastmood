@@ -30,6 +30,7 @@ interface DesktopMenuType {
 interface MobileMenuType {
   openMenu: boolean;
   accountMenu: null | HTMLElement;
+  handleOpenMenu: (event: React.MouseEvent<HTMLElement>) => void;
   isModalOpen: boolean;
   handleCloseMenu?: () => void;
   handleCloseModal: () => void;
@@ -192,8 +193,6 @@ export const DesktopMenuDropdowns: React.FC<DesktopMenuType> = ({
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-
-
         {accountMenuData.map(({ text, icon: Icon }, index) => {
           return (
             <MenuItem
@@ -217,6 +216,7 @@ export const MobileMenuDropdowns: React.FC<MobileMenuType> = ({
   handleCloseMenu,
   handleCloseModal: closeModal,
   handleCloseBrowse,
+  handleOpenMenu,
   accountMenu,
   isModalOpen,
   isBrowseOpen,
@@ -226,20 +226,6 @@ export const MobileMenuDropdowns: React.FC<MobileMenuType> = ({
   const { theme, setTheme } = useTheme();
   const [addAnimate, setAddAnimate] = useState(false);
   const [themeColor, setThemeColor] = useState(true);
-  const navItems = [
-    {
-      text: "home",
-    },
-    {
-      text: "blog",
-    },
-    {
-      text: "anime",
-    },
-    {
-      text: "community",
-    },
-  ];
 
   useEffect(() => {
     setMounted(true);
@@ -258,6 +244,52 @@ export const MobileMenuDropdowns: React.FC<MobileMenuType> = ({
     setTimeout(() => {
       setAddAnimate(false);
     }, 500);
+  };
+  const navItems = {
+    links: [
+      {
+        text: "home",
+      },
+      {
+        text: "blog",
+      },
+      {
+        text: "anime",
+      },
+      {
+        text: "community",
+      },
+    ],
+    menu1: [
+      {
+        text: "favourite",
+        icon: BookmarkBorderOutlined,
+      },
+      {
+        text: "my lists",
+        icon: FormatListBulletedOutlined,
+      },
+      {
+        text: "history",
+        icon: HistoryOutlined,
+      },
+    ],
+    menu2: [
+      {
+        text: "notifications",
+        icon: Message,
+      },
+      {
+        text: "my account",
+        icon: Settings,
+      },
+    ],
+    menu3: [
+      {
+        text: "logout",
+        icon: Logout,
+      },
+    ],
   };
   return (
     <div>
@@ -295,12 +327,12 @@ export const MobileMenuDropdowns: React.FC<MobileMenuType> = ({
           elevation: 0,
           sx: {
             backgroundColor: "#FF5E03",
-            padding: "0.5em",
+            padding: "0.3em",
             width: "21rem",
             color: "#FFFFFF",
-            overflow: "visible",
             filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-            mt: 1.5,
+            mt: 1,
+            maxHeight: "30rem",
 
             "&:before": {
               content: '""',
@@ -319,7 +351,7 @@ export const MobileMenuDropdowns: React.FC<MobileMenuType> = ({
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <div className='flex items-center justify-between px-4 pt-4 pb-6'>
+        <div className='flex items-center justify-between px-4 pt-2 pb-6'>
           <div className='flex items-center space-x-3'>
             <span className='border w-8 h-8 md:w-10 md:h-10 rounded-full overflow-hidden'>
               <Image
@@ -328,7 +360,9 @@ export const MobileMenuDropdowns: React.FC<MobileMenuType> = ({
                 alt='Profile'
               />
             </span>
-            <p className='text-[1rem] md:text-[1.2rem] my-auto text-white'>Beastmood</p>
+            <p className='text-[1rem] md:text-[1.2rem] my-auto text-white'>
+              Beastmood
+            </p>
           </div>
           <div
             onClick={() => {
@@ -358,12 +392,13 @@ export const MobileMenuDropdowns: React.FC<MobileMenuType> = ({
           </div>
         </div>
 
-        <ul className='flex flex-col !my-3'>
-          {navItems.map((navItem, index) => {
+        <ul className='flex flex-col my-0 sm:!my-3'>
+          {navItems.links.map((navItem, index) => {
             return (
               <li
+                onClick={handleCloseMenu}
                 key={index}
-                className='block leading-5 px-5 py-2.5 capitalize text-[1.05rem]'
+                className='block leading-5 px-5 py-1.5 sm:py-2.5 capitalize text-[.9rem] sm:text-[1.05rem]'
               >
                 <Link href='/'>{navItem.text}</Link>
               </li>
@@ -371,40 +406,62 @@ export const MobileMenuDropdowns: React.FC<MobileMenuType> = ({
           })}
         </ul>
 
-        <hr />
+        <hr className='h-0.5 w-full bg-[#434242] border-none my-4' />
 
-        <MenuItem onClick={handleCloseMenu} className='menuItems !mt-4'>
-          <BookmarkBorderOutlined />
-          <span>Favourite</span>
-        </MenuItem>
-        <MenuItem onClick={handleCloseMenu} className='menuItems'>
-          <FormatListBulletedOutlined />
-          <span>My lists</span>
-        </MenuItem>
-        <MenuItem onClick={handleCloseMenu} className='menuItems !mb-4'>
-          <HistoryOutlined />
-          <span>History</span>
-        </MenuItem>
+        <div className='gap-y-0'>
+          {navItems.menu1.map(({ text, icon: Icon }, index) => {
+            return (
+              <MenuItem
+                key={index}
+                onClick={handleCloseMenu}
+                className='flex items-center space-x-2 !py-0 !my-0 capitalize'
+              >
+                <Icon className='text-[1rem] sm:text-[1.1rem] leading-[0px]' />
+                <span className='text-[.9rem] leading-[0px] text-light'>
+                  {text}
+                </span>
+              </MenuItem>
+            );
+          })}
+        </div>
 
-        <hr />
-        <MenuItem onClick={handleCloseMenu} className='menuItems !mt-4'>
-          <Message fontSize='small' />
-          <span>notifications</span>
-        </MenuItem>
-        <MenuItem onClick={handleCloseMenu} className='menuItems !mb-4'>
-          <Settings fontSize='small' />
-          <span>my account</span>
-        </MenuItem>
-        <hr />
-        <MenuItem onClick={handleCloseMenu} className='menuItems !my-2'>
-          <Logout fontSize='small' />
-          <span>Logout</span>
-        </MenuItem>
+        <hr className='h-0.5 w-full bg-[#434242] border-none my-4' />
+
+        <div className='gap-y-0'>
+          {navItems.menu2.map(({ text, icon: Icon }, index) => {
+            return (
+              <MenuItem
+                key={index}
+                onClick={handleCloseMenu}
+                className='flex items-center space-x-2 !py-0 !my-0 capitalize'
+              >
+                <Icon className='text-[1rem] sm:text-[1.1rem] leading-[0px]' />
+                <span className='text-[.9rem] leading-[0px] text-light'>
+                  {text}
+                </span>
+              </MenuItem>
+            );
+          })}
+        </div>
+
+        <hr className='h-0.5 w-full bg-[#434242] border-none my-4' />
+        <div className='gap-y-0'>
+          {navItems.menu3.map(({ text, icon: Icon }, index) => {
+            return (
+              <MenuItem
+                key={index}
+                onClick={handleCloseMenu}
+                className='flex items-center space-x-2 !py-0 !my-0 capitalize'
+              >
+                <Icon className='text-[1rem] sm:text-[1.1rem] leading-[0px]' />
+                <span className='text-[.9rem] leading-[0px] text-light'>
+                  {text}
+                </span>
+              </MenuItem>
+            );
+          })}
+        </div>
       </Menu>
     </div>
   );
 };
-
-export default function HeaderMenus(): React.ReactElement {
-  return <div></div>;
-}
