@@ -10,11 +10,14 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
+      screens: {
+        xs: "480px",
+      },
       animation: {
         "spin-slow": "spin 0.5s",
       },
       fontFamily: {
-        sans: ["Montserrat", "sans-serif"],
+        sans: ["var(--font-montserrat)"],
       },
       colors: {
         error: "#FF3B3B",

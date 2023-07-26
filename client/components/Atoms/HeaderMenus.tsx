@@ -39,178 +39,6 @@ interface MobileMenuType {
   browseMenu: null | HTMLElement;
 }
 
-export const DesktopMenuDropdowns: React.FC<DesktopMenuType> = ({
-  openMenu,
-  handleCloseMenu,
-  handleCloseModal: closeModal,
-  handleCloseBrowse,
-  accountMenu,
-  isModalOpen,
-  isBrowseOpen,
-  browseMenu,
-}) => {
-  const accountMenuData = [
-    {
-      icon: BookmarkBorderOutlined,
-      text: "favourite",
-    },
-    {
-      icon: FormatListBulletedOutlined,
-      text: "my list",
-    },
-    {
-      icon: HistoryOutlined,
-      text: "history",
-    },
-    {
-      icon: Message,
-      text: "notifications",
-    },
-    {
-      icon: Settings,
-      text: "my account",
-    },
-    {
-      icon: Logout,
-      text: "logout",
-    },
-  ];
-
-  return (
-    <>
-      <>
-        <Modal
-          isOpen={isModalOpen}
-          onClose={closeModal}
-          title='Search'
-          modalWidth='60rem'
-        >
-          <form className='flex overflow-hidden'>
-            <input
-              type='search'
-              name='search'
-              id='search'
-              placeholder='Search'
-              className='p-4 pl-14 font-sans font-normal text-base rounded-md w-full text-dark dark:text-white placeholder:dark:text-white outline-none bg-gray-200 dark:bg-gray-700'
-            />
-            <button
-              type='submit'
-              className='absolute top-[30%] left-6 rounded-t-md translate-y-1/2 py-4 px-3 cursor-pointer'
-            >
-              <SearchOutlined className='text-dark dark:text-white' />
-            </button>
-          </form>
-        </Modal>
-      </>
-
-      {/* Search Modal */}
-      <Menu
-        anchorEl={accountMenu}
-        id='account-menu'
-        open={openMenu}
-        onClose={handleCloseMenu}
-        onClick={handleCloseMenu}
-        PaperProps={{
-          elevation: 0,
-          sx: {
-            backgroundColor: "#FF5E03",
-            width: "21rem",
-            color: "#FFFFFF",
-            overflow: "visible",
-            filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-            mt: 1.5,
-
-            "&:before": {
-              content: '""',
-              display: "block",
-              position: "absolute",
-              top: 0,
-              right: 15,
-              width: 10,
-              height: 10,
-              bgcolor: "#FF5E03",
-              transform: "translateY(-50%) rotate(45deg)",
-              zIndex: 0,
-            },
-          },
-        }}
-        transformOrigin={{ horizontal: "right", vertical: "top" }}
-        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-      >
-        <div className='flex items-center space-x-3 px-4 pt-4 pb-6'>
-          <span className='border w-10 h-10 rounded-full overflow-hidden'>
-            <Image className='object-cover ' src={ProfileImage} alt='Profile' />
-          </span>
-          <p className='text-[1.2rem] my-auto text-white'>Beastmood</p>
-        </div>
-        {accountMenuData.map(({ text, icon: Icon }, index) => {
-          return (
-            <MenuItem
-              key={index}
-              onClick={handleCloseMenu}
-              className={`menuItems ${
-                text === "history" || text === "my account" ? "!mb-4" : ""
-              }`}
-            >
-              <Icon />
-              <span>{text}</span>
-            </MenuItem>
-          );
-        })}
-      </Menu>
-
-      {/* Browse Menu */}
-      <Menu
-        anchorEl={browseMenu}
-        id='account-menu'
-        open={isBrowseOpen}
-        onClose={handleCloseBrowse}
-        onClick={handleCloseBrowse}
-        PaperProps={{
-          elevation: 0,
-          sx: {
-            backgroundColor: "#FF5E03",
-            width: "21rem",
-            color: "#FFFFFF",
-            overflow: "visible",
-            filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-            mt: 1.5,
-
-            "&:before": {
-              content: '""',
-              display: "block",
-              position: "absolute",
-              top: 0,
-              right: 170,
-              width: 10,
-              height: 10,
-              bgcolor: "#FF5E03",
-              transform: "translateY(-50%) rotate(45deg)",
-              zIndex: 0,
-            },
-          },
-        }}
-        transformOrigin={{ horizontal: "right", vertical: "top" }}
-        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-      >
-        {accountMenuData.map(({ text, icon: Icon }, index) => {
-          return (
-            <MenuItem
-              key={index}
-              onClick={handleCloseBrowse}
-              className={`menuItems ${
-                text === "history" || text === "my account" ? "!mb-4" : ""
-              }`}
-            >
-              <span>{text}</span>
-            </MenuItem>
-          );
-        })}
-      </Menu>
-    </>
-  );
-};
-
 export const MobileMenuDropdowns: React.FC<MobileMenuType> = ({
   openMenu,
   handleCloseMenu,
@@ -350,17 +178,18 @@ export const MobileMenuDropdowns: React.FC<MobileMenuType> = ({
         }}
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+        className="visible lg:hidden"
       >
         <div className='flex items-center justify-between px-4 pt-2 pb-6'>
           <div className='flex items-center space-x-3'>
-            <span className='border w-8 h-8 md:w-10 md:h-10 rounded-full overflow-hidden'>
+            <span className='border w-8 h-8 rounded-full overflow-hidden'>
               <Image
                 className='object-cover'
                 src={ProfileImage}
                 alt='Profile'
               />
             </span>
-            <p className='text-[1rem] md:text-[1.2rem] my-auto text-white'>
+            <p className='text-[1rem] my-auto text-white'>
               Beastmood
             </p>
           </div>
@@ -392,13 +221,13 @@ export const MobileMenuDropdowns: React.FC<MobileMenuType> = ({
           </div>
         </div>
 
-        <ul className='flex flex-col my-0 sm:!my-3'>
+        <ul className='flex flex-col my-0'>
           {navItems.links.map((navItem, index) => {
             return (
               <li
                 onClick={handleCloseMenu}
                 key={index}
-                className='block leading-5 px-5 py-1.5 sm:py-2.5 capitalize text-[.9rem] sm:text-[1.05rem]'
+                className='block leading-5 px-5 py-1.5 capitalize text-[.9rem]'
               >
                 <Link href='/'>{navItem.text}</Link>
               </li>
@@ -414,9 +243,9 @@ export const MobileMenuDropdowns: React.FC<MobileMenuType> = ({
               <MenuItem
                 key={index}
                 onClick={handleCloseMenu}
-                className='flex items-center space-x-2 !py-0 !my-0 capitalize'
+                className='flex items-center space-x-2 py-4 !my-0 capitalize font-sans'
               >
-                <Icon className='text-[1rem] sm:text-[1.1rem] leading-[0px]' />
+                <Icon className='text-[1rem] leading-[0px]' />
                 <span className='text-[.9rem] leading-[0px] text-light'>
                   {text}
                 </span>
@@ -433,9 +262,9 @@ export const MobileMenuDropdowns: React.FC<MobileMenuType> = ({
               <MenuItem
                 key={index}
                 onClick={handleCloseMenu}
-                className='flex items-center space-x-2 !py-0 !my-0 capitalize'
+                className='flex items-center space-x-2 py-4 !my-0 capitalize font-sans'
               >
-                <Icon className='text-[1rem] sm:text-[1.1rem] leading-[0px]' />
+                <Icon className='text-[1rem] leading-[0px]' />
                 <span className='text-[.9rem] leading-[0px] text-light'>
                   {text}
                 </span>
@@ -451,9 +280,9 @@ export const MobileMenuDropdowns: React.FC<MobileMenuType> = ({
               <MenuItem
                 key={index}
                 onClick={handleCloseMenu}
-                className='flex items-center space-x-2 !py-0 !my-0 capitalize'
+                className='flex items-center space-x-2 !py-4 !my-0 capitalize font-sans'
               >
-                <Icon className='text-[1rem] sm:text-[1.1rem] leading-[0px]' />
+                <Icon className='text-[1rem]  leading-[0px]' />
                 <span className='text-[.9rem] leading-[0px] text-light'>
                   {text}
                 </span>

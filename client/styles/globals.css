@@ -2,9 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}
+
+
 @layer base {
   body {
-    @apply font-['Montserrat'_sans-serif];
+    @apply font-sans;
   }
 
   * {
@@ -75,7 +91,7 @@
   }
 
   .menuItems {
-    @apply flex items-center space-x-4 text-[1.1rem] py-4 capitalize;
+    @apply flex items-center space-x-4 text-[1.1rem] capitalize;
   }
 
   .header {
@@ -103,11 +119,11 @@
   }
 
   .card-container img {
-    @apply w-[80%] sm:w-[190px] h-[226px] shrink-0 rounded-md;
+    @apply w-[180px] sm:w-[190px] h-[226px] shrink-0 rounded-md;
   }
 
   .card-container div {
-    @apply flex flex-col justify-self-start w-[80%] sm:w-[190px];
+    @apply flex flex-col justify-self-start w-[80%] sm:w-[190px] -ml-7 sm:ml-0 ;
   }
 
   .card-container div > span {
@@ -119,27 +135,31 @@
   }
 
   .card-container > span {
-    @apply leading-5 text-black/70 dark:text-white/90 text-base ml-0 w-[80%] sm:w-[190px] capitalize;
+    @apply leading-5 text-black/70 dark:text-white/90 text-base -ml-7 sm:ml-0 w-[80%] sm:w-[190px] capitalize;
   }
 
   .card-container2 {
-    @apply flex flex-nowrap items-center !justify-self-stretch !justify-items-start w-full sm:w-auto;
+    @apply flex flex-nowrap items-center !justify-self-stretch !justify-items-start w-auto;
+  }
+
+    .card-container2 div {
+    @apply flex flex-col w-full;
   }
 
   .card-container2 img {
-    @apply w-[89%] h-[220px] sm:w-[236px] xl:w-[236px] sm:h-[143px] shrink-0 rounded-md object-cover;
+    @apply w-[168px] h-[108px] sm:w-[236px] xl:w-[236px] sm:h-[143px] shrink-0 rounded-md object-cover;
   }
 
   .card-container2 div > span {
-    @apply text-black dark:text-[#FFF] font-bold text-lg capitalize;
+    @apply text-black dark:text-[#FFF] font-bold text-sm sm:text-base md:text-lg capitalize w-full;
   }
 
   .card-container2 div > p {
-    @apply text-black/40 dark:text-darkGray font-normal text-sm;
+    @apply text-black/40 dark:text-darkGray font-normal text-xs sm:text-sm md:text-base;
   }
 
   .card-container2 span {
-    @apply leading-5 text-black/60 dark:text-white/90 text-base capitalize;
+    @apply leading-5 text-black/60 dark:text-white/90 text-xs sm:text-sm md:text-base capitalize w-full;
   }
 
   .specials-active {
@@ -169,16 +189,13 @@
   }
 
   .rating {
-    @apply flex items-center justify-center border-2 border-dark dark:border-light  hover:border-main2-brand dark:hover:border-main2-brand  hover:bg-main2-brand rounded-md text-dark dark:text-light dark:hover:text-dark text-center capitalize mt-16 w-fit xl:w-36 whitespace-nowrap py-3 px-4 xl:py-4 transition duration-500;
+    @apply flex items-center justify-center border-2 border-dark dark:border-light hover:border-main2-brand dark:hover:border-main2-brand  hover:bg-main2-brand rounded-md text-dark dark:text-light dark:hover:text-dark text-center capitalize mt-16 w-fit xl:w-36 whitespace-nowrap py-3 px-4 xl:py-4 transition duration-500;
   }
 
   .rating * {
-    @apply bg-main2-brand text-dark rounded-full p-1 text-xl ml-4;
+    @apply bg-main2-brand text-dark rounded-full p-1 text-xl ml-4 group-hover:bg-dark group-hover:text-white;
   }
 
-  .rating:hover * {
-    @apply bg-dark text-white;
-  }
 }
 
 /* Swiper JS */

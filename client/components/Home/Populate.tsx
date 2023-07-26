@@ -99,19 +99,19 @@ export default function Populate() {
 
       <Swiper
         spaceBetween={10}
-        slidesPerView={1}
+        slidesPerView={2}
         speed={800}
         grabCursor={true}
         modules={[Navigation]}
         breakpoints={{
           // when window width is >= 320px
           320: {
-            slidesPerView: 1,
-            spaceBetween: 30,
+            slidesPerView: 2,
+            spaceBetween: 10,
           },
           // when window width is >= 480px
           480: {
-            slidesPerView: 2,
+            slidesPerView: 3,
             spaceBetween: 10,
           },
           // when window width is >= 640px
@@ -145,7 +145,7 @@ export default function Populate() {
         {swipData?.map(({ image, title, dateRelease, genre }, index) => {
           return (
             <SwiperSlide className='mb-16' key={index}>
-              <div className='card card-container sm:mx-0'>
+              <div className='card card-container !mx-0'>
                 <Image src={image} alt={title} />
 
                 <div>

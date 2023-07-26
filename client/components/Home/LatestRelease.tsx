@@ -100,7 +100,7 @@ export default function LatestRelease() {
 
       <Swiper
         spaceBetween={10}
-        slidesPerView={1}
+        slidesPerView={2}
         speed={800}
         grabCursor={true}
         pagination={{
@@ -110,12 +110,12 @@ export default function LatestRelease() {
         breakpoints={{
           // when window width is >= 320px
           320: {
-            slidesPerView: 1,
-            spaceBetween: 30,
+            slidesPerView: 2,
+            spaceBetween: 10,
           },
           // when window width is >= 480px
           480: {
-            slidesPerView: 2,
+            slidesPerView: 3,
             spaceBetween: 10,
           },
           // when window width is >= 640px

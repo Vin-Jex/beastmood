@@ -18,7 +18,7 @@ const Rating = () => {
           </p>
         </div>
 
-        <button className='rating mx-auto'>
+        <button className='rating mx-auto group'>
           View all
           <ArrowForward />
         </button>

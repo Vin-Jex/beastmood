@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function Specials() {
   return (
-    <div className='p-4 md:p-10 my-2 md:my-5'>
+    <div className='p-5 xs:p-2 sm:p-10 my-2 md:my-5'>
       <div className='flex flex-col items-center justify-center'>
         <span className='text-[1.3rem] md:text-[1.7rem] text-[#000000] dark:text-[#fff] capitalize font-[Montserrat] font-medium leading-7'>
           beast mood&apos;s special
@@ -20,8 +20,8 @@ export default function Specials() {
           <SpecialsSidenav />
         </div>
 
-        <div className='col-span-5 flex flex-col items-center justify-center'>
-          <div className='flex flex-wrap items-center justify-center lg:justify-start gap-x-2 xl:gap-x-8 gap-y-8 xl:gap-y-20 w-full mb-8'>
+        <div className='col-span-5 flex flex-col items-center justify-center w-full'>
+          <div className='flex flex-wrap items-center justify-center lg:justify-start gap-x-4 xl:gap-x-8 gap-y-8 xl:gap-y-20 w-full mb-8'>
             <div className='card card-container2'>
               <Image src={image} alt='kimitsu no yaiba' />
 

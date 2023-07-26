@@ -9,10 +9,16 @@ import {
   LightMode,
   ModeNight,
   SearchOutlined,
+  FormatListBulletedOutlined,
+  HistoryOutlined,
+  Logout,
+  Message,
+  Settings,
+  KeyboardArrowDown,
 } from "@mui/icons-material";
 import ProfileImage from "@/public/images/profile.png";
 import { useTheme } from "next-themes";
-import { DesktopMenuDropdowns } from "./HeaderMenus";
+import Modal from "../Molecules/Modal/Modal";
 
 const navItems = [
   {
@@ -31,8 +37,6 @@ const navItems = [
 
 export default function DesktopHeader() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [accountMenu, setAccountMenu] = useState<null | HTMLElement>(null);
-  const [browse, setBrowse] = useState<null | HTMLElement>(null);
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
   const [addAnimate, setAddAnimate] = useState(false);
@@ -45,21 +49,6 @@ export default function DesktopHeader() {
   if (!mounted) {
     return null;
   }
-
-  const openModal = Boolean(accountMenu);
-  const isBrowseOpen = Boolean(browse);
-  const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAccountMenu(event.currentTarget);
-  };
-  const handleCloseMenu = () => {
-    setAccountMenu(null);
-  };
-  const handleBrowse = (event: React.MouseEvent<HTMLElement>) => {
-    setBrowse(event.currentTarget);
-  };
-  const handleCloseBrowse = () => {
-    setBrowse(null);
-  };
 
   const handleModal = () => {
     setIsModalOpen(true);
@@ -80,6 +69,33 @@ export default function DesktopHeader() {
     }, 500);
   };
 
+  const accountMenuData = [
+    {
+      icon: BookmarkBorderOutlined,
+      text: "favourite",
+    },
+    {
+      icon: FormatListBulletedOutlined,
+      text: "my list",
+    },
+    {
+      icon: HistoryOutlined,
+      text: "history",
+    },
+    {
+      icon: Message,
+      text: "notifications",
+    },
+    {
+      icon: Settings,
+      text: "my account",
+    },
+    {
+      icon: Logout,
+      text: "logout",
+    },
+  ];
+
   return (
     <nav className='sticky top-0 right-0 items-center px-4 bg-main-brand text-light h-full w-full hidden lg:flex'>
       <div className='w-16 cursor-pointer' title='Beast Mood'>
@@ -89,17 +105,35 @@ export default function DesktopHeader() {
       </div>
       <div className='w-full flex items-center justify-between'>
         <ul className='block ml-10'>
-          <li
-            className='inline-block items-center cursor-pointer leading-5 px-5 capitalize text-base xl:text-lg'
-            onClick={handleBrowse}
-          >
-            category <ArrowDropDown />
-          </li>
+          <div className='inline-block group relative'>
+            <li className='inline-block items-center cursor-pointer leading-5 px-5 capitalize text-base xl:text-lg text-light hover:text-gray-100/95'>
+              category
+              <KeyboardArrowDown className='mt-0 group-hover:-rotate-180 group-hover:mt-0.5 transition ease-in-out duration-300' />
+            </li>
+
+            <div className='absolute top-[2rem] left-0 hidden group-hover:md:block hover:md:block bg-[#FF5E03] text-white w-[22rem] animate-fade-in  overflow-visible shadow-[0px_10px_80px_rgba(0,_0,_0,_0.32)]  rounded-md'>
+              <div className='-mt-[.45rem]'>
+                <div
+                  className='w-5 h-5 left-[1rem] absolute 
+                   bg-[#FF5E03] rotate-45'
+                ></div>
+              </div>
+
+              <div className='p-6'>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed
+                tenetur omnis explicabo. Suscipit, perferendis unde ab,
+                distinctio amet pariatur iure qui aliquid ipsam fugiat illo ipsa
+                eius at dolores modi incidunt neque sit quo nihil culpa.
+                Consequatur accusamus excepturi beatae earum animi ut, dolore ex
+                illum velit dolores unde blanditiis!
+              </div>
+            </div>
+          </div>
           {navItems.map((navItem, index) => {
             return (
               <li
                 key={index}
-                className='inline-block leading-5 px-5 capitalize text-base xl:text-lg'
+                className='inline-block leading-5 px-5 capitalize text-base xl:text-lg text-light hover:text-gray-100/95'
               >
                 <Link href='/'>{navItem.text}</Link>
               </li>
@@ -134,49 +168,100 @@ export default function DesktopHeader() {
               </div>
             </div>
           </div>
+
           <SearchOutlined
             onClick={handleModal}
             className='cursor-pointer'
             sx={{ fontSize: "2rem" }}
           />
+
           <BookmarkBorderOutlined
             className='cursor-pointer'
             sx={{ fontSize: "2rem" }}
           />
-          <div
-            className='flex items-center cursor-pointer'
-            onClick={handleOpenMenu}
-          >
-            <span
-              className='w-10 h-10 border rounded-full overflow-hidden'
-              title='Account Settings'
-              aria-controls={openModal ? "account-menu" : undefined}
-              aria-haspopup='true'
-              aria-expanded={openModal ? "true" : undefined}
-            >
-              <Image
-                className='object-cover'
-                src={ProfileImage}
-                alt='Profile'
+
+          {/* Account Menu */}
+          <div className='group'>
+            <div className='flex items-center cursor-pointer'>
+              <span
+                className='w-10 h-10 border rounded-full overflow-hidden'
+                title='Account Settings'
+              >
+                <Image
+                  className='object-cover'
+                  src={ProfileImage}
+                  alt='Profile'
+                />
+              </span>
+              <KeyboardArrowDown
+                className='mt-0 group-hover:-rotate-180 group-hover:mt-0.5 transition ease-in-out duration-300'
+                sx={{ fontSize: "1.8rem", marginTop: "0.3rem", color: "#fff" }}
               />
-            </span>
-            <ArrowDropDownOutlined
-              sx={{ fontSize: "2rem", margin: 0, color: "#fff" }}
-            />
-          </div>
-          <div className='!ml-0'>
-            <DesktopMenuDropdowns
-              accountMenu={accountMenu}
-              handleCloseMenu={handleCloseMenu}
-              handleCloseModal={handleCloseModal}
-              openMenu={openModal}
-              isModalOpen={isModalOpen}
-              browseMenu={browse}
-              isBrowseOpen={isBrowseOpen}
-              handleCloseBrowse={handleCloseBrowse}
-            />
+            </div>
+
+            {/* Popover menu */}
+            <div className='absolute top-[3.3rem] right-4 hidden group-hover:md:block hover:md:block bg-[#FF5E03] text-white w-[22rem]  animate-fade-in  overflow-visible shadow-[0px_10px_80px_rgba(0,_0,_0,_0.32)] rounded-md'>
+              <div className='-mt-[.45rem]'>
+                <div
+                  className='w-5 h-5 right-[2.6rem] absolute 
+                   bg-[#FF5E03] rotate-45'
+                ></div>
+              </div>
+              <div className='px-6 py-8'>
+                <div className='flex items-center space-x-3 pb-4 my-auto'>
+                  <span className='w-10 h-10 border rounded-full overflow-hidden'>
+                    <Image
+                      className='object-cover '
+                      src={ProfileImage}
+                      alt='Profile'
+                    />
+                  </span>
+                  <p className='text-[1.1rem] text-white mt-1'>Beastmood</p>
+                </div>
+                {accountMenuData.map(({ text, icon: Icon }, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className={`menuItems !text-white hover:!text-gray-200 py-3 last:!pb-0 ${
+                        text === "history" || text === "my account"
+                          ? "!mb-4"
+                          : ""
+                      }`}
+                    >
+                      <Icon />
+                      <span>{text}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
+        {/* Search Modal */}
+        <>
+          <Modal
+            isOpen={isModalOpen}
+            onClose={handleCloseModal}
+            title='Search'
+            modalWidth='60rem'
+          >
+            <form className='flex overflow-hidden'>
+              <input
+                type='search'
+                name='search'
+                id='search'
+                placeholder='Search'
+                className='p-4 pl-14 font-sans font-normal text-base rounded-md w-full text-dark dark:text-white placeholder:dark:text-white outline-none bg-gray-200 dark:bg-gray-700'
+              />
+              <button
+                type='submit'
+                className='absolute top-[30%] left-6 rounded-t-md translate-y-1/2 py-4 px-3 cursor-pointer'
+              >
+                <SearchOutlined className='text-dark dark:text-white' />
+              </button>
+            </form>
+          </Modal>
+        </>
       </div>
     </nav>
   );
