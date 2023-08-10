@@ -8,9 +8,12 @@ export function FormProvider({ children }: { children: React.ReactNode }) {
     lastName: "",
     email: "",
   });
+  const [croppedImage, setCroppedImage] = useState<Object | string>("");
 
   return (
-    <CreateAccountContext.Provider value={{ formData, setFormData }}>
+    <CreateAccountContext.Provider
+      value={{ formData, setFormData, croppedImage, setCroppedImage }}
+    >
       {children}
     </CreateAccountContext.Provider>
   );
