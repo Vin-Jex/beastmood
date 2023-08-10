@@ -49,16 +49,16 @@ export default function DesktopHeader() {
   };
 
   return (
-    <nav className='sticky top-0 right-0 items-center px-4 bg-main-brand text-light h-full w-full hidden lg:flex'>
+    <nav className='hidden lg:flex items-center px-4 h-full w-full '>
       <div className='w-16 cursor-pointer' title='Beast Mood'>
         <Link href='/'>
-          <Image src={Logo} alt='Logo' className='w-20 object-scale-down' />
+          <Image src={Logo} alt='Logo' className='w-16 object-scale-down' />
         </Link>
       </div>
       <div className='w-full flex items-center justify-between'>
         <ul className='block ml-10'>
           <div className='inline-block group relative'>
-            <li className='inline-block items-center cursor-pointer leading-5 px-5 capitalize text-base xl:text-lg text-light hover:text-gray-100/95'>
+            <li className='inline-block items-center cursor-pointer leading-5 px-5 capitalize text-base text-light hover:text-gray-100/95'>
               category
               <KeyboardArrowDown className='mt-0 group-hover:-rotate-180 group-hover:mt-0.5 transition ease-in-out duration-300' />
             </li>
@@ -72,14 +72,16 @@ export default function DesktopHeader() {
               </div>
 
               <div className='flex justify-between px-4 py-8 h-full divide-x-2'>
-                <ul className='flex flex-wrap items-center justify-center flex-[50%] w-full gap-y-6'>
+                <ul className='flex flex-wrap items-center justify-start flex-[100%] w-full gap-y-6 pl-12'>
                   {browserItems.genres.map((data, index) => {
                     return (
                       <li
                         key={index}
-                        className='capitalize w-[40%] text-base font-medium text-light'
+                        className='capitalize w-[50%] !justify-items-start !text-left text-sm font-medium text-light'
                       >
-                        {data.text}
+                        <Link href={data.link}>
+                          {data.text}
+                        </Link>
                       </li>
                     );
                   })}
@@ -87,14 +89,16 @@ export default function DesktopHeader() {
 
                 {/* <div className='h-full w-1 bg-[#434242] border-none'>l</div> */}
 
-                <ul className='flex flex-wrap items-center justify-center pl-14 flex-[50%] w-full gap-y-6'>
+                <ul className='flex flex-wrap items-center justify-start flex-[100%] w-full gap-y-6 pl-20'>
                   {browserItems.genres2.map((data, index) => {
                     return (
                       <li
                         key={index}
-                        className='capitalize w-[40%] text-base font-medium text-light'
+                        className='capitalize w-[50%] text-sm font-medium text-light'
                       >
-                        {data.text}
+                        <Link href={data.link}>
+                          {data.text}
+                        </Link>
                       </li>
                     );
                   })}
@@ -106,7 +110,7 @@ export default function DesktopHeader() {
             return (
               <li
                 key={index}
-                className='inline-block leading-5 px-5 capitalize text-base xl:text-lg text-light hover:text-gray-100/95'
+                className='inline-block leading-5 px-5 capitalize text-base text-light hover:text-gray-100/95'
               >
                 <Link href='/'>{navItem.text}</Link>
               </li>
@@ -145,19 +149,19 @@ export default function DesktopHeader() {
           <SearchOutlined
             onClick={handleModal}
             className='cursor-pointer'
-            sx={{ fontSize: "2rem" }}
+            sx={{ fontSize: "1.7rem" }}
           />
 
           <BookmarkBorderOutlined
             className='cursor-pointer'
-            sx={{ fontSize: "2rem" }}
+            sx={{ fontSize: "1.7rem" }}
           />
 
           {/* Account Menu */}
-          <div className='group'>
+          <div className='group relative'>
             <div className='flex items-center cursor-pointer'>
               <span
-                className='w-10 h-10 border rounded-full overflow-hidden'
+                className='w-9 h-9 border rounded-full overflow-hidden'
                 title='Account Settings'
               >
                 <Image
@@ -173,10 +177,10 @@ export default function DesktopHeader() {
             </div>
 
             {/* Popover menu */}
-            <div className='absolute top-[3.3rem] right-4 hidden group-hover:md:block hover:md:block bg-[#FF5E03] text-white w-[22rem]  animate-fade-in  overflow-visible shadow-[0px_10px_80px_rgba(0,_0,_0,_0.32)] rounded-md'>
+            <div className='absolute top-[2.9rem] right-0 hidden group-hover:md:block hover:md:block bg-[#FF5E03] text-white w-[22rem]  animate-fade-in  overflow-visible shadow-[0px_10px_80px_rgba(0,_0,_0,_0.32)] rounded-md'>
               <div className='-mt-[.45rem]'>
                 <div
-                  className='w-5 h-5 right-[2.6rem] absolute 
+                  className='w-5 h-5 right-[2rem] absolute 
                    bg-[#FF5E03] rotate-45'
                 ></div>
               </div>
