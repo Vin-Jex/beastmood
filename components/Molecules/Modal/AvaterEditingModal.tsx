@@ -2,7 +2,7 @@ import React, { useCallback, useContext, useState } from "react";
 import Modal from "./Modal";
 import { Close } from "@mui/icons-material";
 import { Slider } from "@mui/material";
-import { Area, Point } from "react-easy-crop/types";
+import { Area, Point } from "react-easy-crop/types.js";
 import Cropper from "react-easy-crop";
 import bg from "@/public/images/Large2.jpg";
 import Button from "../Input/Button";

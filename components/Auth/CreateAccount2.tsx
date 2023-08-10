@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import Layout from "../Layout/Layout";
 import Input from "../Molecules/Input/Input";
 import Button from "../Molecules/Input/Button";
-import Link from "next/link";
+
 import Image, { StaticImageData } from "next/image";
 import bg from "@/public/images/Bungostraydogs-small-1.png";
 import { useRouter } from "next/router";
