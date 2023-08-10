@@ -34,7 +34,7 @@ export default function MobileHeader() {
   };
 
   return (
-    <nav className='sticky top-0 right-0 flex items-center bg-main-brand text-light h-full w-full lg:hidden'>
+    <nav className='flex lg:hidden items-center h-full w-full'>
       <div className='w-16 cursor-pointer' title='Beast Mood'>
         <Link href='/'>
           <Image src={Logo} alt='Logo' className='w-20 object-scale-down' />
