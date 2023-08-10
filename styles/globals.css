@@ -19,7 +19,7 @@
 
 @layer base {
   body {
-    @apply font-montserrat ;
+    @apply font-montserrat;
   }
 
   * {
@@ -29,10 +29,6 @@
 }
 
 @layer components {
-  /* .bg {
-    @apply bg-[url(../public/images/auth.png)];
-  } */
-
   .container {
     @apply w-full 3xl:!max-w-[2500px] 2xl:!max-w-[100%] xl:!max-w-full lg:!max-w-full md:!max-w-full sm:!max-w-full xs:!max-w-full;
   }
@@ -50,7 +46,7 @@
   }
 
   .customCheckbox label::before {
-    @apply content-[''] w-[1em] h-[1em] my-auto sm:w-[1.2em] sm:h-[1.2em] rounded-[0.15em] mr-[0.5em] ring-1 ring-black dark:border-light dark:ring-light;
+    @apply content-[''] w-[1em] h-[1em] my-auto sm:w-[1.2em] sm:h-[1.2em] rounded-[0.15em] mr-[0.5em] ring-1 ring-main-brand dark:border-light dark:ring-light;
   }
 
   .customCheckbox label:hover::before,
@@ -68,7 +64,7 @@
   }
 
   .customCheckbox input[type="checkbox"]:checked + label::before {
-    @apply flex items-center justify-center bg-main-brand !text-white content-['\002714'] dark:content-['\002713'];
+    @apply flex items-center justify-center bg-main-brand !text-white content-['\002713'] dark:content-['\002713'];
   }
 
   .customCheckbox input[type="checkbox"]:disabled + label::before {
@@ -94,7 +90,7 @@
   }
 
   .menuItems {
-    @apply flex items-center space-x-4 text-[1.1rem] capitalize;
+    @apply flex items-center space-x-3 text-[.9rem] capitalize;
   }
 
   .header {
@@ -198,10 +194,17 @@
   .rating * {
     @apply bg-main2-brand text-dark rounded-full p-1 text-xl ml-4 group-hover:bg-dark group-hover:text-white;
   }
+
+  .input {
+    @apply w-full px-3 sm:px-4 py-3.5 rounded-md !outline-none bg-transparent !border-dark dark:!border-light/70 text-xs sm:text-sm placeholder:text-xs sm:placeholder:text-sm placeholder:text-dark dark:placeholder:text-light/80 first-letter:!uppercase text-dark dark:text-light/80;
+  }
+
+  .slider {
+    padding: 22px 0px;
+  }
 }
 
 /* Swiper JS */
-
 .swiper-pagination-bullet-active {
   @apply !bg-gradient-to-r from-[#FF5E03] to-[#FFD64E] !rounded-[10px] !w-[120px];
 }
@@ -211,11 +214,11 @@
 }
 
 .theme-btn {
-  @apply bg-white w-12 h-7 md:w-14 md:h-8 rounded-full px-1 py-1 shadow-[inset_0_8px_60px_rgba(0,0,0,.1),_inset_0_8px_8px_rgba(0,0,0,.1),_inset_0_-4px_4px_rgba(0,0,0,.1)] relative flex items-center cursor-pointer;
+  @apply bg-white w-12 h-7 rounded-full px-1 py-1 shadow-[inset_0_8px_60px_rgba(0,0,0,.1),_inset_0_8px_8px_rgba(0,0,0,.1),_inset_0_-4px_4px_rgba(0,0,0,.1)] relative flex items-center cursor-pointer;
 }
 
 .theme-btn__indicator {
-  @apply bg-white w-[1.5rem] h-[1.5rem] md:w-[1.8rem] md:h-[1.8rem] rounded-full absolute shadow-[0_8px_40px_rgba(0,0,0,.2)] transition-transform duration-300 ease-in;
+  @apply bg-white w-[1.5rem] h-[1.5rem] rounded-full absolute shadow-[0_8px_40px_rgba(0,0,0,.2)] transition-transform duration-300 ease-in;
 }
 
 .theme-btn__icon-container {
@@ -247,7 +250,7 @@ html.dark {
 }
 
 .dark .theme-btn__indicator {
-  @apply transform translate-x-[1.17rem] md:translate-x-[1.3rem] bg-[#2b2b2b] shadow-[0_8px_40px_rgba(0,0,0,.3)];
+  @apply transform translate-x-[1.1rem] bg-[#2b2b2b] shadow-[0_8px_40px_rgba(0,0,0,.3)];
 }
 
 .dark .theme-btn__icon {
