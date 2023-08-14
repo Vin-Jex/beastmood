@@ -14,21 +14,21 @@ export default function CreateAccount1() {
       <Image
         src={AuthBG}
         alt='Auth Background'
-        className='mt-[6rem] -mr-[8rem]  -z-10'
+        className='mt-[6rem] -mr-[8rem] -z-10 hidden md:block'
       />
 
-      <div className='w-full sm:w-[600px] flex flex-col items-center justify-center p-10 my-auto'>
-        <div className='flex flex-col justify-center items-center mb-4'>
-          <span className='xl:text-3xl lg:text-2xl md:text-xl text-lg text-main-brand leading-4 font-bold'>
+      <div className='w-full sm:w-[600px] flex flex-col text-start md:items-center justify-center p-6 md:p-10 my-auto'>
+        <div className='flex flex-col justify-center items-start md:items-center mb-4'>
+          <span className='xl:text-3xl md:text-2xl text-2xl text-main-brand leading-4 font-bold'>
             Create an account
           </span>
-          <p className='text-[#020202]/70 dark:text-light/70 text-left sm:text-center text-sm w-[90%]'>
+          <p className='text-[#020202]/70 dark:text-light/70 text-left sm:text-center text-sm w-[90%] mt-2.5 md:mt-0'>
             Create your beastmood account to like, add to fave and leave
             comments!
           </p>
         </div>
 
-        <form className='w-full px-12 mt-4 space-y-4'>
+        <form className='w-full md:p-10 mt-4 space-y-4'>
           <div className='space-y-2'>
             <div className='space-y-1'>
               <label

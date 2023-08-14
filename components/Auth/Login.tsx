@@ -12,20 +12,23 @@ export default function Login() {
       <Image
         src={AuthBG}
         alt='Auth Background'
-        className='mt-[4rem] -mr-[8rem] -z-10'
+        className='mt-[4rem] -mr-[8rem] -z-10 hidden md:block'
       />
 
-      <div className='w-full sm:w-[600px] flex flex-col items-center justify-center p-10 my-auto'>
-        <div className='flex flex-col justify-center items-center mb-4'>
-          <span className='xl:text-3xl lg:text-2xl md:text-xl text-lg text-main-brand leading-4 font-bold'>
+      <div className='w-full sm:w-[600px] flex flex-col items-start md:items-center justify-center p-6 md:p-10 my-auto'>
+        <div className='flex flex-col justify-center items-start md:items-center mb-4'>
+          <span className='xl:text-3xl lg:text-2xl md:text-xl text-lg text-main-brand leading-4 font-bold hidden md:block'>
             Log into your account
           </span>
-          <p className='text-[#020202]/70 dark:text-light/70 text-sm'>
+          <span className='text-2xl text-main-brand leading-4 font-bold block md:hidden'>
+            Login
+          </span>
+          <p className='text-[#020202]/70 dark:text-light/70 text-sm mt-2.5'>
             Log into your BeastMood Account
           </p>
         </div>
 
-        <form className='w-full px-12 mt-4 space-y-3'>
+        <form className='w-full md:px-12 mt-4 space-y-3'>
           <div className='space-y-3'>
             <div className='space-y-1'>
               <label
