@@ -17,6 +17,8 @@ module.exports = {
       },
       fontFamily: {
         montserrat: ["var(--font-montserrat)"],
+        inter: ["var(--font-inter)"],
+        poppins: ["var(--poppins)"],
       },
       colors: {
         error: "#FF3B3B",
