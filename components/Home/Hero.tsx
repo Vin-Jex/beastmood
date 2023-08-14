@@ -51,11 +51,10 @@ export default function Hero() {
                   as One Piece.
                 </p>
                 <div className='flex gap-x-4 md:gap-x-8 !mt-10'>
-                  <button className='flex items-center gap-x-3 bg-main-brand text-white text-lg font-medium capitalize px-8 py-3.5 rounded-md w-fit'>
+                  <button className='flex items-center gap-x-3 bg-main-brand text-white text-sm md:text-base font-medium capitalize px-8 py-3.5 rounded-md w-fit'>
                     <svg
                       xmlns='http://www.w3.org/2000/svg'
-                      width='24'
-                      height='20'
+                      className='w-[17px] md:w-[20px]'
                       viewBox='0 0 24 20'
                       fill='none'
                     >
@@ -66,11 +65,10 @@ export default function Hero() {
                     </svg>
                     Read
                   </button>
-                  <button className='flex items-center gap-x-3 bg-main2-brand text-lg text-dark font-medium capitalize px-8 py-3.5 rounded-md w-fit'>
+                  <button className='flex items-center gap-x-3 bg-main2-brand text-sm md:text-base text-dark font-medium capitalize px-8 py-3.5 rounded-md w-fit'>
                     <svg
                       xmlns='http://www.w3.org/2000/svg'
-                      width='21'
-                      height='15'
+                      className='w-[18px] md:w-[21px] mt-0.5 md:mt-1'
                       viewBox='0 0 21 15'
                       fill='none'
                     >

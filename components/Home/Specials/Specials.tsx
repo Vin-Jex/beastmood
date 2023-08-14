@@ -7,7 +7,7 @@ export default function Specials() {
   return (
     <div className='p-5 xs:p-2 sm:p-10 my-2 md:my-5'>
       <div className='flex flex-col items-center justify-center'>
-        <span className='text-[1.3rem] md:text-[1.7rem] text-[#000000] dark:text-[#fff] capitalize font-[Montserrat] font-medium leading-7'>
+        <span className='text-[1.3rem] md:text-[1.7rem] text-[#000000] dark:text-[#fff] capitalize font-montserrat font-medium leading-7'>
           beast mood&apos;s special
         </span>
         <p className='text-[.8rem] md:text-[.9rem] text-[#000000]/60 dark:text-darkGray'>

@@ -1,10 +1,10 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import React, { ReactNode } from 'react'
+import Image from "next/image";
+import Link from "next/link";
+import React, { ReactNode } from "react";
 import Logo from "@/public/images/logo2.png";
-import { Facebook, Instagram, LinkedIn, Twitter } from '@mui/icons-material';
-import { SvgIconTypeMap } from '@mui/material';
-import { OverridableComponent } from '@mui/material/OverridableComponent';
+import { Facebook, Instagram, LinkedIn, Twitter } from "@mui/icons-material";
+import { SvgIconTypeMap } from "@mui/material";
+import { OverridableComponent } from "@mui/material/OverridableComponent";
 
 interface Link {
   text: string;
@@ -50,35 +50,35 @@ const footerLinks: FooterLinks = {
     {
       text: "Pricing Margins",
       link: "/",
-    }
+    },
   ],
   socials: [
     {
       text: "Facebook",
       link: "/",
-      icon: Facebook
+      icon: Facebook,
     },
     {
       text: "Twitter",
       link: "/",
-      icon: Twitter
+      icon: Twitter,
     },
     {
       text: "Instagram",
       link: "/",
-      icon: Instagram
-    }, 
+      icon: Instagram,
+    },
     {
       text: "LinkedIn",
       link: "/",
-      icon: LinkedIn
-    }
-  ]
+      icon: LinkedIn,
+    },
+  ],
 };
 
 const Footer = () => {
   return (
-    <footer className='pt-10 px-4 md:px-12 flex flex-col space-y-12 divide-y divide-blue-300 font-[Montserrat] container mx-auto my-auto'>
+    <footer className='pt-10 px-4 md:px-12 flex flex-col space-y-12 divide-y divide-blue-300 font-montserrat container mx-auto my-auto'>
       <div className='flex flex-col justify-center'>
         <div className='cursor-pointer w-fit'>
           <Link href='/'>
@@ -95,7 +95,7 @@ const Footer = () => {
             <form className='flex space-x-3 w-full'>
               <input
                 type='text'
-                className='bg-light text-dark placeholder:text-lg font-[Montserrat] p-3 md:p-4 w-full border-2 border-dark focus:outline-none'
+                className='bg-light text-dark placeholder:text-lg font-montserrat p-3 md:p-4 w-full border-2 border-dark focus:outline-none'
                 placeholder='Enter your email'
               />
               <button className='border-2 border-dark text-dark py-2 md:py-4 px-4 md:px-10'>
@@ -194,6 +194,6 @@ const Footer = () => {
       </div>
     </footer>
   );
-}
+};
 
-export default Footer
+export default Footer;
