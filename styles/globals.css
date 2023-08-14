@@ -102,7 +102,7 @@
   }
 
   .header div > span {
-    @apply text-[1.1rem] md:text-[1.7rem] text-[#000000] dark:text-[#fff] capitalize font-[Montserrat] font-medium leading-7;
+    @apply text-[1.1rem] md:text-[1.7rem] text-[#000000] dark:text-[#fff] capitalize font-montserrat font-medium leading-7;
   }
 
   .header div > p {
@@ -114,7 +114,7 @@
   }
 
   .card {
-    @apply flex flex-col items-center gap-3 font-[Montserrat];
+    @apply flex flex-col items-center gap-3 font-montserrat;
   }
 
   .card-container img {
@@ -176,7 +176,7 @@
   }
 
   .specials-nav li p {
-    @apply text-black dark:text-white text-[.85rem] md:text-[1rem] lg:text-[1.2rem] leading-[21.017px] font-[Montserrat] font-medium capitalize whitespace-nowrap;
+    @apply text-black dark:text-white text-[.85rem] md:text-[1rem] lg:text-[1.2rem] leading-[21.017px] font-montserrat font-medium capitalize whitespace-nowrap;
   }
 
   .specials-nav li .icon {
@@ -188,7 +188,7 @@
   }
 
   .rating {
-    @apply flex items-center justify-center border-2 border-dark dark:border-light hover:border-main2-brand dark:hover:border-main2-brand  hover:bg-main2-brand rounded-md text-dark dark:text-light dark:hover:text-dark text-center capitalize mt-16 w-fit xl:w-36 whitespace-nowrap py-3 px-4 xl:py-4 transition duration-500;
+    @apply flex items-center justify-center border-2 border-dark dark:border-light hover:border-main2-brand dark:hover:border-main2-brand hover:bg-main2-brand rounded-md text-dark dark:text-light dark:hover:text-dark text-center capitalize mt-6 sm:mt-10 md:mt-16 w-fit xl:w-36 whitespace-nowrap py-3 px-4 xl:py-4 transition duration-500;
   }
 
   .rating * {
