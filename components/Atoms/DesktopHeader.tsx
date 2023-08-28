@@ -49,7 +49,7 @@ export default function DesktopHeader() {
   };
 
   return (
-    <nav className='hidden lg:flex items-center px-4 h-full w-full '>
+    <nav className='hidden lg:flex items-center px-4 h-full w-full'>
       <div className='w-16 cursor-pointer' title='Beast Mood'>
         <Link href='/'>
           <Image src={Logo} alt='Logo' className='w-16 object-scale-down' />
