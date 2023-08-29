@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
+import { Autoplay, EffectFade } from "swiper/modules";
 import Img1 from "@/public/images/Large1.jpg";
 import Img2 from "@/public/images/Large2.jpg";
 import Img3 from "@/public/images/Large3.jpg";
@@ -18,11 +18,14 @@ export default function Hero() {
       <Swiper
         spaceBetween={0}
         centeredSlides={true}
+        effect={"fade"}
+        loop={true}
         autoplay={{
           delay: 2500,
           disableOnInteraction: false,
         }}
-        modules={[Autoplay]}
+        navigation={false}
+        modules={[Autoplay, EffectFade]}
       >
         {images.map((image, index) => (
           <SwiperSlide key={index}>
