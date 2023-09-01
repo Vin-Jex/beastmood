@@ -102,19 +102,19 @@
   }
 
   .header div > span {
-    @apply text-[1.1rem] md:text-[1.7rem] text-[#000000] dark:text-[#fff] capitalize font-montserrat font-medium leading-7;
+    @apply text-[1.1rem] md:text-[1.3rem] text-[#000000] dark:text-[#fff] capitalize font-montserrat font-medium leading-7;
   }
 
   .header div > p {
-    @apply text-[.7rem] md:text-[.9rem] text-[#000000]/60 dark:text-darkGray;
+    @apply text-[.7rem] md:text-[.8rem] text-[#000000]/60 dark:text-darkGray;
   }
 
   .header button {
-    @apply bg-transparent md:bg-main-brand text-[.6rem] md:text-base text-main-brand md:text-white uppercase whitespace-nowrap p-1 md:p-3 flex items-center justify-center gap-2;
+    @apply bg-transparent md:bg-main-brand text-[.6rem] md:text-[.8rem] text-main-brand md:text-white rounded-md uppercase whitespace-nowrap p-1 md:p-3 flex items-center justify-center gap-2;
   }
 
   .card {
-    @apply flex flex-col items-center gap-3 font-montserrat;
+    @apply flex flex-col items-center gap-y-1 gap-x-2 font-montserrat;
   }
 
   .card-container img {
@@ -126,15 +126,15 @@
   }
 
   .card-container div > span {
-    @apply text-black dark:text-[#FFF] font-bold text-lg capitalize;
+    @apply text-black dark:text-[#FFF] font-bold sm:text-[.8rem] md:text-[.9rem] capitalize;
   }
 
   .card-container div > p {
-    @apply text-black/40 dark:text-darkGray font-normal text-sm leading-3;
+    @apply text-black/40 dark:text-darkGray font-normal text-sm md:text-[.75rem] leading-4;
   }
 
   .card-container > span {
-    @apply leading-5 text-black/70 dark:text-white/90 text-base -ml-7 sm:ml-0 w-[80%] sm:w-[190px] capitalize;
+    @apply leading-4 text-black/70 dark:text-white/90 text-base md:text-[.75rem] -ml-7 sm:ml-0 w-[80%] sm:w-[190px] capitalize;
   }
 
   .card-container2 {
@@ -150,15 +150,15 @@
   }
 
   .card-container2 div > span {
-    @apply text-black dark:text-[#FFF] font-bold text-sm sm:text-base md:text-lg capitalize w-full;
+    @apply text-black dark:text-[#FFF] font-bold text-sm sm:text-[.8rem] md:text-[.9rem] capitalize w-full;
   }
 
   .card-container2 div > p {
-    @apply text-black/40 dark:text-darkGray font-normal text-xs sm:text-sm md:text-base;
+    @apply text-black/40 dark:text-darkGray font-normal text-xs sm:text-sm md:text-[.8rem];
   }
 
   .card-container2 span {
-    @apply leading-5 text-black/60 dark:text-white/90 text-xs sm:text-sm md:text-base capitalize w-full;
+    @apply leading-3 text-black/60 dark:text-white/90 text-xs sm:text-sm md:text-[.8rem] capitalize w-full;
   }
 
   .specials-active {
@@ -176,7 +176,7 @@
   }
 
   .specials-nav li p {
-    @apply text-black dark:text-white text-[.85rem] md:text-[1rem] lg:text-[1.2rem] leading-[21.017px] font-montserrat font-medium capitalize whitespace-nowrap;
+    @apply text-black dark:text-white text-[.8rem] lg:text-[.9rem] leading-[21.017px] font-montserrat font-medium capitalize whitespace-nowrap;
   }
 
   .specials-nav li .icon {
@@ -188,7 +188,7 @@
   }
 
   .rating {
-    @apply flex items-center justify-center border-2 border-dark dark:border-light hover:border-main2-brand dark:hover:border-main2-brand hover:bg-main2-brand rounded-md text-dark dark:text-light dark:hover:text-dark text-center capitalize mt-6 sm:mt-10 md:mt-16 w-fit xl:w-36 whitespace-nowrap py-3 px-4 xl:py-4 transition duration-500;
+    @apply flex items-center justify-center border-2 border-dark dark:border-light hover:border-main2-brand dark:hover:border-main2-brand hover:bg-main2-brand rounded-md text-dark dark:text-light dark:hover:text-dark text-center capitalize mt-6 sm:mt-10 w-fit xl:w-36 whitespace-nowrap py-3.5 px-3 transition duration-300 text-sm;
   }
 
   .rating * {
