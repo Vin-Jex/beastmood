@@ -12,16 +12,104 @@ import Subscricbe from "@/components/Home/Subscribe";
 import Headlines from "@/components/Home/Headlines";
 import Footer from "@/components/Layout/Footer/Footer";
 import Layout from "@/components/Layout/Layout";
+import MangaSwiper, { MangaItemsType } from "@/components/Molecules/MangaSwiper";
+import Img1 from "@/public/images/Onepiece-small-1.png";
+
+export const swipData: MangaItemsType[] = [
+  {
+    image: Img1,
+    title: "One Piece",
+    dateRelease: "Chapter 1064 out today",
+    genre: "Genre | Sub",
+  },
+  {
+    image: Img1,
+    title: "One Piece",
+    dateRelease: "Chapter 1064 out today",
+    genre: "Genre | Sub",
+  },
+  {
+    image: Img1,
+    title: "One Piece",
+    dateRelease: "Chapter 1064 out today",
+    genre: "Genre | Sub",
+  },
+  {
+    image: Img1,
+    title: "One Piece",
+    dateRelease: "Chapter 1064 out today",
+    genre: "Genre | Sub",
+  },
+  {
+    image: Img1,
+    title: "One Piece",
+    dateRelease: "Chapter 1064 out today",
+    genre: "Genre | Sub",
+  },
+  {
+    image: Img1,
+    title: "One Piece",
+    dateRelease: "Chapter 1064 out today",
+    genre: "Genre | Sub",
+  },
+  {
+    image: Img1,
+    title: "One Piece",
+    dateRelease: "Chapter 1064 out today",
+    genre: "Genre | Sub",
+  },
+  {
+    image: Img1,
+    title: "One Piece",
+    dateRelease: "Chapter 1064 out today",
+    genre: "Genre | Sub",
+  },
+  {
+    image: Img1,
+    title: "One Piece",
+    dateRelease: "Chapter 1064 out today",
+    genre: "Genre | Sub",
+  },
+  {
+    image: Img1,
+    title: "One Piece",
+    dateRelease: "Chapter 1064 out today",
+    genre: "Genre | Sub",
+  },
+  {
+    image: Img1,
+    title: "One Piece",
+    dateRelease: "Chapter 1064 out today",
+    genre: "Genre | Sub",
+  },
+  {
+    image: Img1,
+    title: "One Piece",
+    dateRelease: "Chapter 1064 out today",
+    genre: "Genre | Sub",
+  },
+];
 
 export default function Home() {
   return (
     <Layout>
       <Hero />
-      <LatestRelease />
+      <MangaSwiper
+        title='Latest Release'
+        subtitle='Checkout the latest and trending collections'
+        items={swipData}
+        navigationLink='/mangas/'
+        pagination={true}
+      />
       <Specials />
       <Rating />
       <Features />
-      <Populate />
+      <MangaSwiper
+        title='popular reads'
+        items={swipData}
+        navigationLink='/mangas/'
+        pagination={false}
+      />
       <Subscricbe />
       <Headlines />
     </Layout>
