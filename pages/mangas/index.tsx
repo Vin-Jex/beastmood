@@ -90,6 +90,7 @@ const commentData = [
 
 const Index = () => {
   const [visibleComments, setVisibleComments] = useState(3);
+  const [commentValue, setCommentValue] = useState("");
 
   const loadMoreComments = () => {
     setVisibleComments((prevVisibleComments) => prevVisibleComments + 3);
@@ -368,7 +369,16 @@ const Index = () => {
           </div>
           <div className='flex flex-col bg-[#FAFAFA] dark:bg-white/[8%] p-4 space-y-5 my-4'>
             <CommentCard1 />
-            <CommentInput placeholder='Leave your comments' />
+            <CommentInput
+              placeholder='Leave your comments'
+              onSubmit={function (value: string): void {
+                console.log(commentValue);
+              }}
+              value={commentValue}
+              onChange={(e: any) => {
+                setCommentValue(e.target.value);
+              }}
+            />
             <div>
               <div className='space-y-6'>
                 {commentData.slice(0, visibleComments).map((comment, index) => (
