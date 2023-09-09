@@ -7,6 +7,7 @@ import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import { useRouter } from "next/router";
 
 const swipData = [
   {
@@ -84,6 +85,7 @@ const swipData = [
 ];
 
 export default function LatestRelease() {
+  const router = useRouter();
   return (
     <div className='px-3 py-4 md:p-10 space-y-7'>
       <div className='header'>
@@ -92,8 +94,13 @@ export default function LatestRelease() {
           <p>Latest Release Checkout the latest and trending collections</p>
         </div>
 
-        <button className=''>
-          <span className="hidden md:block">See all</span>
+        <button
+          className=''
+          onClick={() => {
+            router.push("/mangas");
+          }}
+        >
+          <span className='hidden md:block'>See all</span>
           <ArrowForwardIos className='' sx={{ fontSize: "1rem" }} />
         </button>
       </div>
@@ -137,11 +144,11 @@ export default function LatestRelease() {
           },
           1350: {
             slidesPerView: 7,
-            spaceBetween: 30,
+            spaceBetween: 20,
           },
           1536: {
-            slidesPerView: 8,
-            spaceBetween: 30,
+            slidesPerView: 7,
+            spaceBetween: 15,
           },
         }}
         className='mySwiper'

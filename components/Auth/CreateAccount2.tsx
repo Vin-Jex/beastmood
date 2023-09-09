@@ -1,8 +1,7 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Layout from "../Layout/Layout";
 import Input from "../Molecules/Input/Input";
 import Button from "../Molecules/Input/Button";
-
 import Image, { StaticImageData } from "next/image";
 import bg from "@/public/images/Bungostraydogs-small-1.png";
 import { useRouter } from "next/router";
@@ -35,13 +34,11 @@ const CreateAccount2 = () => {
     setModalOpen(!modalOpen);
   };
 
-  console.log(file, "FDGBTRD");
-
   return (
     <div className='flex justify-center items-center h-screen overflow-hidden'>
       <div className='w-full sm:w-[600px] flex flex-col items-center justify-center px-6 py-6 sm:p-8 md:p-10 my-auto'>
         <div className='flex flex-col justify-center items-center mb-4'>
-          <span className='xl:text-3xl lg:text-2xl md:text-xl text-lg text-center w-[80%] text-main-brand leading-6 sm:leading-6 font-bold'>
+          <span className='xl:text-4xl lg:text-2xl md:text-xl text-lg text-center w-[80%] text-main-brand leading-6 sm:leading-6 font-bold'>
             Choose your Avatar and Username
           </span>
         </div>
@@ -56,7 +53,7 @@ const CreateAccount2 = () => {
               className='w-20 h-20 md:w-28 md:h-28 rounded-full object-cover'
             />
 
-            <div className="!mt-3">
+            <div className='!mt-3'>
               <Button
                 type='button'
                 className='w-fit bg-transparent ring-2 ring-dark/80 dark:ring-light/80 text-dark dark:text-light text-sm px-4 py-3 capitalize'

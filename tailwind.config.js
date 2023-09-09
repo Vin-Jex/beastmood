@@ -33,6 +33,7 @@ module.exports = {
         "dark2-brand": "#FAA600",
         "light2-brand": "#FFDF75",
         darkGray: "#ffffffb0",
+        gray2: '#B4BBC6',
         dark: "#3A3A3C",
         dark2: "#6B7588",
         dark3: "#8F90A6",
@@ -41,6 +42,9 @@ module.exports = {
         light2: "#EBEBF0",
         light3: "#F2F2F5",
         light4: "#FAFAFC",
+      },
+      boxShadow: {
+        custom: "0px 10px 80px rgba(0, 0, 0, 0.82)",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
