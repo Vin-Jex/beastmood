@@ -1,12 +1,103 @@
-import React from "react";
+import React, { useState } from "react";
 import Input from "../Molecules/Input/Input";
 import { VisibilityOffOutlined, VisibilityOutlined } from "@mui/icons-material";
 import Link from "next/link";
 import Button from "../Molecules/Input/Button";
 import AuthBG from "@/public/images/authbg.png";
 import Image from "next/image";
+import fetchApi from "../Atoms/fetchApi";
+import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 
 export default function Login() {
+  const [emailUsername, setEmailUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const router = useRouter();
+
+  const isEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(
+    emailUsername
+  );
+  const isUsername = /^[a-zA-Z0-9_\- ]+$/.test(emailUsername);
+
+  const maxAge = 1 * 24 * 60 * 60;
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    // Reset previous error messages
+    setErrorMessage("");
+    setSuccessMessage("");
+
+    if (!isEmail && !isUsername) {
+      setErrorMessage("Please enter a valid email address or username");
+      return;
+    }
+
+    if (!navigator.onLine) {
+      setErrorMessage("No internet connection");
+      return;
+    }
+
+    if (!emailUsername.trim()) {
+      setErrorMessage("Email or username cannot be empty");
+      return;
+    }
+
+    if (!password.trim()) {
+      setErrorMessage("Password cannot be empty");
+      return;
+    }
+
+    if (!isEmail && !isUsername) {
+      setErrorMessage(
+        "Username must contain only letters, numbers, underscores, hyphens, and spaces."
+      );
+      return;
+    }
+
+    let payload: any = {};
+
+    if (isEmail) {
+      payload = { email: emailUsername };
+    } else {
+      payload = { username: emailUsername };
+    }
+
+    payload.password = password;
+
+    try {
+      const response = await fetch(
+        "https://api.beastmoodsee.com/api/v1/auth/login",
+        {
+          method: "POST",
+          body: JSON.stringify(payload),
+        }
+      );
+
+      if (!response.ok) {
+        const responseData = await response.json();
+        setErrorMessage(responseData.error || "Login failed");
+        return;
+      }
+
+      const data = await response.json();
+      Cookies.set("jwt", data.token, { expires: maxAge * 1000, secure: true });
+      setSuccessMessage("Login successful");
+    } catch (error) {
+      if (!navigator.onLine) {
+        setErrorMessage("Network error: Unable to reach the server");
+      } else {
+        console.error("Error Fetching: ", error);
+      }
+    }
+  };
+
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      handleLogin(event);
+    }
+  };
   return (
     <div className='flex justify-center items-center h-screen overflow-hidden'>
       <Image
@@ -28,6 +119,11 @@ export default function Login() {
           </p>
         </div>
 
+        {errorMessage && <div className='text-red-500'>{errorMessage}</div>}
+        {successMessage && (
+          <div className='text-green-500'>{successMessage}</div>
+        )}
+
         <form className='w-full md:px-12 mt-4 space-y-3'>
           <div className='space-y-3'>
             <div className='space-y-1'>
@@ -39,11 +135,15 @@ export default function Login() {
               </label>
               <Input
                 id='email'
-                type='email'
-                className='input'
-                // showIcon={Visibility}
-                // hideIcon={HideImageRounded}
+                type='text'
+                className={`input ${errorMessage ? "!border-red-500" : ""}`}
                 placeholder='Enter your email'
+                required
+                value={emailUsername}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setEmailUsername(e.target.value)
+                }
+                onKeyPress={handleKeyPress}
               />
             </div>
             <div className='space-y-1'>
@@ -56,10 +156,18 @@ export default function Login() {
               <Input
                 id='password'
                 type='password'
-                className='input'
+                className={`input ${
+                  errorMessage ? "!border-red-500" : "!border-red-500"
+                }`}
                 showIcon={VisibilityOutlined}
                 hideIcon={VisibilityOffOutlined}
+                required
                 placeholder='•••••••••••'
+                value={password}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setPassword(e.target.value)
+                }
+                onKeyPress={handleKeyPress}
               />
             </div>
             <div className='flex justify-between items-center !my-4'>
@@ -81,7 +189,8 @@ export default function Login() {
               </span>
             </div>
             <Button
-              type='submit'
+              type='button'
+              onClick={handleLogin}
               className='btn bg-main-brand disabled:bg-dark3 disabled:text-light4 text-white text-[.9rem] py-3 hover:scale-[.98] transition-all ease-in-out duration-300'
             >
               Login
