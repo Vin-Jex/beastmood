@@ -12,7 +12,7 @@ interface CommentInputProps {
 
 const CommentInput: React.FC<CommentInputProps> = ({
   placeholder = "Leave your comment here",
-  maxEmojis = 10,
+  maxEmojis = 100,
   onSubmit,
   value,
   onChange,
@@ -20,8 +20,10 @@ const CommentInput: React.FC<CommentInputProps> = ({
   const [showEmojiPicker, setShowEmojiPicker] = useState<boolean>(false);
 
   const handleEmojiClick = (emoji: string) => {
+    // Append the emoji to the current value in the textarea
+    const updatedValue = value + emoji;
     // Update the input value
-    onChange(value + emoji);
+    onChange(updatedValue);
   };
 
   const allEmojis = Object.keys(emojilib).slice(0, maxEmojis);
@@ -41,7 +43,7 @@ const CommentInput: React.FC<CommentInputProps> = ({
         className='bg-[#D9D9D9] placeholder:text-dark text-dark dark:text-dark border outline-none px-4 py-3 rounded-md resize-none h-20 w-full'
         placeholder={placeholder}
         value={value}
-        onChange={(e) => onChange(e.target.value)} // Update the input value
+        onChange={(e) => onChange(e.target.value)}
       />
 
       <button

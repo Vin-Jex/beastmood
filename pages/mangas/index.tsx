@@ -1,5 +1,5 @@
 import Layout from "@/components/Layout/Layout";
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import image from "@/public/images/Onepiece-small-1.png";
 import Img2 from "@/public/images/Rectangle 24.png";
 import Image from "next/image";
@@ -95,6 +95,8 @@ const Index = () => {
   const loadMoreComments = () => {
     setVisibleComments((prevVisibleComments) => prevVisibleComments + 3);
   };
+
+  const handleSubmit = () => {};
   return (
     <Layout>
       <div>
@@ -371,13 +373,9 @@ const Index = () => {
             <CommentCard1 />
             <CommentInput
               placeholder='Leave your comments'
-              onSubmit={function (value: string): void {
-                console.log(commentValue);
-              }}
+              onSubmit={handleSubmit}
               value={commentValue}
-              onChange={(e: any) => {
-                setCommentValue(e.target.value);
-              }}
+              onChange={(e: any) => setCommentValue(e)}
             />
             <div>
               <div className='space-y-6'>

@@ -7,7 +7,7 @@ import {
   ThumbUpAltOutlined,
   TurnRight,
 } from "@mui/icons-material";
-import CommentReplyForm from "./CommentInput";
+import CommentInput from "./CommentInput";
 
 export interface CommentLayoutTypes {
   userProfile: string | StaticImageData;
@@ -90,10 +90,7 @@ const CommentLayout: React.FC<CommentLayoutTypes> = ({
       setRepliesData([...repliesData, newReply]);
 
       // Clear the reply text input
-      setReplyText("");
-
-      // Hide the reply form after submission
-      setShowReplyForm(false);
+      // setReplyText("");
     }
   };
 
@@ -118,7 +115,8 @@ const CommentLayout: React.FC<CommentLayoutTypes> = ({
       </p>
 
       {showReplyForm && (
-        <CommentReplyForm
+        <CommentInput
+          placeholder="Leave your reply"
           onSubmit={handleReplySubmit}
           value={replyText}
           onChange={(newValue) => setReplyText(newValue)}
