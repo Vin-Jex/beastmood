@@ -6,9 +6,72 @@ import Button from "../Molecules/Input/Button";
 import AuthBG from "@/public/images/authbg.png";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useFormContext } from "@/context/FormContext";
 
 export default function CreateAccount1() {
-  const route = useRouter()
+  const {
+    setEmail,
+    setPassword,
+    setFormErrors,
+    setLastName,
+    setFirstName,
+    formErrors,
+    firstName,
+    lastName,
+    email,
+    password,
+  } = useFormContext();
+  const route = useRouter();
+
+  const validateInput = (type: string, value: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/;
+
+    if (type === "email") {
+      return emailRegex.test(value) ? "" : "Invalid email address";
+    }
+
+    if (type === "password") {
+      if (passwordRegex.test(value)) {
+        return "";
+      } else {
+        return "Password must be at least 8 characters long and contain uppercase, lowercase, and special characters.";
+      }
+    }
+  };
+
+  const handleInputChange = (type: string, value: string) => {
+    const errorMessage = validateInput(type, value);
+    setFormErrors((prevState) => ({
+      ...prevState,
+      [type]: errorMessage,
+    }));
+
+    if (type === "email") {
+      setEmail(value);
+    }
+
+    if (type === "password") {
+      setPassword(value);
+    }
+
+    if (type === "lastName") {
+      setLastName(value);
+    }
+
+    if (type === "firstName") {
+      setFirstName(value);
+    }
+  };
+
+  const isFormValid =
+    formErrors.email === "" &&
+    formErrors.password === "" &&
+    firstName !== "" &&
+    lastName !== "" &&
+    email !== "" &&
+    password !== "";
+
   return (
     <div className='flex justify-center items-center h-screen overflow-hidden'>
       <Image
@@ -29,7 +92,17 @@ export default function CreateAccount1() {
         </div>
 
         <form className='w-full md:p-10 mt-4 space-y-4'>
+          <div className='space-y-3 '>
+            {formErrors.password && (
+              <p className='text-red-500'>{formErrors.password}</p>
+            )}
+
+            {formErrors.email && (
+              <p className='text-red-500'>{formErrors.email}</p>
+            )}
+          </div>
           <div className='space-y-2'>
+            {/* First Name Input */}
             <div className='space-y-1'>
               <label
                 htmlFor='firstName'
@@ -41,11 +114,15 @@ export default function CreateAccount1() {
                 id='firstName'
                 type='text'
                 name='firstName'
+                value={firstName}
+                onChange={(e) => handleInputChange("firstName", e.target.value)}
                 className='input'
-                placeholder='Enter your first name'
+                placeholder='Enter first name'
+                required
               />
             </div>
 
+            {/* Last Name Input */}
             <div className='space-y-1'>
               <label
                 htmlFor='lastName'
@@ -57,11 +134,15 @@ export default function CreateAccount1() {
                 id='lastName'
                 type='text'
                 name='lastName'
+                value={lastName}
+                onChange={(e) => handleInputChange("lastName", e.target.value)}
                 className='input'
-                placeholder='Enter your last name'
+                placeholder='Enter last name'
+                required
               />
             </div>
 
+            {/* Email Input */}
             <div className='space-y-1'>
               <label
                 htmlFor='email'
@@ -73,14 +154,22 @@ export default function CreateAccount1() {
                 id='email'
                 type='email'
                 name='email'
-                className='input'
+                value={email}
+                onChange={(e) => handleInputChange("email", e.target.value)}
+                className={`w-full px-3 sm:px-4 py-3.5 rounded-md !outline-none bg-transparent text-xs sm:text-sm placeholder:text-xs sm:placeholder:text-sm placeholder:text-dark dark:placeholder:text-light/80 first-letter:!uppercase text-dark dark:text-light/80 ${
+                  formErrors.email
+                    ? "!border-[#FF3B3B] dark:!border-[#FF3B3B]"
+                    : "!border-dark dark:!border-light/70"
+                }`}
                 placeholder='Enter your email'
+                required
               />
             </div>
 
+            {/* Password Input */}
             <div className='space-y-1'>
               <label
-                htmlFor='email'
+                htmlFor='password'
                 className='text-dark dark:text-light text-base px-1'
               >
                 Password
@@ -88,45 +177,62 @@ export default function CreateAccount1() {
               <Input
                 id='password'
                 type='password'
-                className='input'
+                name='password'
+                value={password}
+                onChange={(e) => handleInputChange("password", e.target.value)}
+                className={`w-full px-3 sm:px-4 py-3.5 rounded-md !outline-none bg-transparent text-xs sm:text-sm placeholder:text-xs sm:placeholder:text-sm placeholder:text-dark dark:placeholder:text-light/80 first-letter:!uppercase text-dark dark:text-light/80 ${
+                  formErrors.password
+                    ? "!border-[#FF3B3B] dark:!border-[#FF3B3B]"
+                    : "!border-dark dark:!border-light/70"
+                }`}
                 showIcon={VisibilityOutlined}
                 hideIcon={VisibilityOffOutlined}
                 placeholder='Enter Password'
+                required
               />
             </div>
+
+            {/* Continue Button */}
             <Button
               type='submit'
               onClick={(e) => {
                 e.preventDefault();
-                route.push("/auth/account/ac648c1c846a008ea7d6631515");
+                if (isFormValid) {
+                  route.push("/auth/account/ac648c1c846a008ea7d6631515");
+                }
               }}
-              className='btn bg-main-brand disabled:bg-dark3 disabled:text-light4 text-white text-[.9rem] py-3.5 !mt-4 hover:scale-[.98] transition-all ease-in-out duration-300'
+              className={`btn bg-main-brand disabled:cursor-not-allowed disabled:bg-dark3 disabled:text-light4 text-white text-[.9rem] py-3.5 !mt-4 ${
+                isFormValid ? "hover:scale-[.98]" : ""
+              } transition-all ease-in-out duration-300`}
+              disabled={!isFormValid}
             >
               Continue
             </Button>
           </div>
-
-          <div className='w-full pt-1'>
-            <Button
-              type='button'
-              className='btn bg-transparent border-[2px] border-[#B5AFFF] disabled:bg-dark3 disabled:text-dark2 text-dark dark:text-light/70 text-[.9rem] py-3.5 hover:scale-[.98] transition-all ease-in-out duration-300'
-            >
-              Sign up with Google
-            </Button>
-          </div>
-
-          <div className='w-full flex items-center justify-center gap-1 text-lg'>
-            <span className='text-gray-800 dark:text-light/90 text-sm'>
-              Already have an account?{" "}
-            </span>
-            <Link
-              href='/auth/login'
-              className='text-main-brand font-semibold text-sm'
-            >
-              Login
-            </Link>
-          </div>
         </form>
+
+        {/* Sign up with Google Button */}
+        <div className='w-full md:w-[85%] mt-4 md:-mt-4'>
+          <Button
+            type='button'
+            className={`btn bg-transparent border-[2px] border-[#B5AFFF] disabled:bg-dark3 disabled:text-dark2 text-dark dark:text-light/70 text-[.9rem] py-3.5 transition-all ease-in-out duration-300`}
+          >
+            Sign up with Google
+          </Button>
+        </div>
+
+        {/* Login Link */}
+        <div className='w-full flex items-center justify-center gap-1 text-lg mt-2'>
+          <span className='text-gray-800 dark:text-light/90 text-sm'>
+            Already have an account?{" "}
+          </span>
+          <Link
+            href='/auth/login'
+            className='text-main-brand font-semibold text-sm'
+          >
+            Login
+          </Link>
+        </div>
       </div>
     </div>
   );
