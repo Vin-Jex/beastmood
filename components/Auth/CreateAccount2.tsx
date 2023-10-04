@@ -6,12 +6,17 @@ import Image, { StaticImageData } from "next/image";
 import bg from "@/public/images/Bungostraydogs-small-1.png";
 import { useRouter } from "next/router";
 import AvaterEditingModal from "../Molecules/Modal/AvaterEditingModal";
+import { useFormContext } from "@/context/FormContext";
+import { CircularProgress } from "@mui/material";
 
 const CreateAccount2 = () => {
   const route = useRouter();
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [file, setFile] = useState<string | StaticImageData>(bg);
-  const [photoURL, setPhotoURL] = useState<string | StaticImageData>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const { image, setImage, username, setUsername, setFormErrors, formErrors } =
+    useFormContext();
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -34,6 +39,26 @@ const CreateAccount2 = () => {
     setModalOpen(!modalOpen);
   };
 
+  const validateUsername = (value: string) => {
+    // Regular expression for validating username
+    const usernameRegex = /^[a-zA-Z][a-zA-Z0-9_-]*$/;
+    const isValid = usernameRegex.test(value);
+    return isValid
+      ? ""
+      : "Username must start with a letter and can only contain alphanumeric characters, hyphens, and underscores.";
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    setTimeout(() => {
+      // After the operation is completed, navigate to the desired route
+      setIsLoading(false);
+      // route.push("/");
+    }, 10000);
+  };
+
   return (
     <div className='flex justify-center items-center h-screen overflow-hidden'>
       <div className='w-full sm:w-[600px] flex flex-col items-center justify-center px-6 py-6 sm:p-8 md:p-10 my-auto'>
@@ -43,13 +68,16 @@ const CreateAccount2 = () => {
           </span>
         </div>
 
-        <form className='w-full px-0 sm:px-4 md:px-12 mt-4 space-y-4'>
+        <form
+          className='w-full px-0 sm:px-4 md:px-12 mt-4 space-y-4'
+          onSubmit={handleSubmit}
+        >
           <div className='w-full flex flex-col items-center justify-center gap-y-8 !mb-8'>
             <Image
-              src={!photoURL ? file : photoURL}
+              src={!image ? file : image}
               alt='avater'
-              width={100}
-              height={100}
+              width='1000'
+              height='1000'
               className='w-20 h-20 md:w-28 md:h-28 rounded-full object-cover'
             />
 
@@ -71,6 +99,9 @@ const CreateAccount2 = () => {
             </div>
           </div>
           <div className='space-y-2'>
+            {formErrors.username && (
+              <p className='text-red-500'>{formErrors.username}</p>
+            )}
             <div className='space-y-1'>
               <label
                 htmlFor='firstName'
@@ -82,8 +113,22 @@ const CreateAccount2 = () => {
                 id='username'
                 type='text'
                 name='username'
-                className='input'
+                className={`w-full px-3 sm:px-4 py-3.5 rounded-md !outline-none bg-transparent text-xs sm:text-sm placeholder:text-xs sm:placeholder:text-sm placeholder:text-dark dark:placeholder:text-light/80 first-letter:!uppercase text-dark dark:text-light/80 ${
+                  formErrors.username
+                    ? "!border-[#FF3B3B] dark:!border-[#FF3B3B]"
+                    : "!border-dark dark:!border-light/70"
+                }`}
                 placeholder='Enter Username'
+                value={username}
+                onChange={(e) => {
+                  const errorMessage = validateUsername(e.target.value);
+                  setFormErrors((prevState) => ({
+                    ...prevState,
+                    username: errorMessage,
+                  }));
+                  setUsername(e.target.value);
+                }}
+                required
               />
               <span className='text-[.69rem] sm:text-xs text-dark/90 dark:text-light/90 px-1'>
                 Alphanumeric characters, hyphens and underscores only.
@@ -92,12 +137,14 @@ const CreateAccount2 = () => {
 
             <Button
               type='submit'
-              onClick={(e) => {
-                e.preventDefault();
-                route.push("/");
-              }}
-              className='btn mx-auto bg-main-brand disabled:bg-dark3 disabled:text-light4 text-white text-[.79rem] sm:text-[.9rem] px-8 py-3.5 !mt-12 hover:scale-[.98] transition-all ease-in-out duration-300 uppercase'
+              disabled={isLoading}
+              className='btn mx-auto min-h-[60px] bg-main-brand disabled:bg-main-brand disabled:text-light4 text-white text-[.79rem] sm:text-[.9rem] px-8 py-3.5 !mt-12 hover:scale-[.98] transition-all ease-in-out duration-300 uppercase relative'
             >
+              {isLoading && (
+                <div className='bg-white text-dark !h-[60px] py-3.5 !w-full absolute top-1/2 -translate-y-1/2 left-0 flex items-center justify-center rounded-md z-10'>
+                  <div className='spinner border-4 border- !rounded-full'></div>
+                </div>
+              )}
               Continue to beastmood
             </Button>
           </div>
@@ -109,7 +156,7 @@ const CreateAccount2 = () => {
         image={file as string}
         handleModal={handleModal}
         isModalOpen={modalOpen}
-        setPhotoURL={setPhotoURL}
+        setPhotoURL={setImage}
       />
     </div>
   );
