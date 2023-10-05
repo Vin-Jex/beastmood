@@ -13,7 +13,6 @@ export const CreateAccountContext = createContext<{
     firstName: "",
     lastName: "",
     email: "",
-    // Initialize other form fields here
   },
   setFormData: () => {},
   croppedImage: {},
