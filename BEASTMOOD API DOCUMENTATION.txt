@@ -1,0 +1,195 @@
+BEASTMOOD API DOCUMENTATION
+
+1. SIGNUP
+https://api.beastmoodsee.com/api/v1/auth/signup
+
+Method: POST
+
+Description
+This endpoint allows a user to create a new account by providing their registration details.
+
+Request Body
+email (string, required): The email address of the user.
+username (string, required): The username for the user's account.
+password (string, required): The password for the user's account. It must meet the following criteria:
+At least 8 characters long.
+Contains at least one uppercase letter.
+Contains at least one lowercase letter.
+Contains at least one special character (!@#$%^&*).
+firstName (string): The user's first name.
+lastName (string): The user's last name.
+
+Responses:
+
+200 OK
+
+Description: Registration successful.
+Response Body:
+
+{
+  "message": "User registered successfully"
+}
+
+400 Bad Request
+
+Description: Invalid request data.
+Response Body:
+
+{
+  "message": "All fields are required."
+}
+
+400 Bad Request
+
+Description: Invalid email address.
+Response Body:
+
+{
+  "message": "Invalid email address."
+}
+
+400 Bad Request
+
+Description: Invalid password.
+Response Body:
+
+{
+  "message": "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, and one special character."
+}
+
+400 Bad Request
+
+Description: Invalid username.
+Response Body:
+
+{
+  "message": "Username must contain only letters, numbers, underscores, hyphens, and spaces."
+}
+
+400 Bad Request
+
+Description: Username or email already taken.
+Response Body:
+
+{
+  "message": "Username or email already taken!"
+}
+
+500 Internal Server Error
+
+Description: An error occurred during signup.
+Response Body:
+
+{
+  "message": "An error occurred during signup, please try again later!"
+}
+
+2. LOGIN
+https://api.beastmoodsee.com/api/v1/auth/login
+
+Method: POST
+
+Description
+This endpoint allows a user to log in by providing their email/username and password.
+
+Request Body
+identifier (string, required): The email address or username of the user.
+password (string, required): The user's password.
+
+Responses:
+
+200 OK
+
+Description: Login successful.
+Response Body:
+
+{
+  "token": "hgeayrgf78y898934yhrtq783reyty89huh47yt",
+  "message": "Logged in successfully!"
+}
+
+401 Unauthorized
+
+Description: Invalid username/email or password.
+Response Body:
+
+{
+  "message": "Invalid username or email, check and try again!"
+}
+
+403 Forbidden
+
+Description: User's email is not verified.
+Response Body:
+
+{
+  "message": "You need to verify your email first!"
+}
+
+404 Not Found
+
+Description: Invalid request data.
+Response Body:
+
+{
+  "message": "Email/username and password fields cannot be empty!"
+}
+
+500 Internal Server Error
+
+Description: An error occurred during login.
+Response Body:
+
+{
+  "message": "An unexpected error occurred logging you in, please try again later!"
+}
+
+3. VERIFY EMAIL
+https://api.beastmoodsee.com/api/v1/verify?email=emailaddress@address.com&token=tokensentwithemail
+
+Method: GET
+
+Description
+This endpoint allows a user to verify their email address by providing an email and a verification token. Upon successful verification, the user's email verification status is updated.
+
+Request Query Parameters
+email (string, required): The email address to be verified.
+token (string, required): The verification token associated with the email address.
+
+Responses:
+
+200 OK
+
+Description: Email verification successful.
+Response Body:
+
+{
+  "message": "Email verified successfully!"
+}
+
+400 Bad Request
+
+Description: Invalid verification link. Request another email verification link.
+Response Body:
+
+{
+  "message": "Invalid verification link. Request another email verification link!"
+}
+
+401 Unauthorized
+
+Description: Email and token are required to verify the email address.
+Response Body:
+
+{
+  "message": "Email and token are required to verify the email address!"
+}
+
+500 Internal Server Error
+
+Description: An error occurred during email verification.
+Response Body:
+
+{
+  "error": "An error occurred while verifying user email!"
+}
