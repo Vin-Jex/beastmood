@@ -1,7 +1,7 @@
-import React, { ButtonHTMLAttributes } from "react";
+import React, { ButtonHTMLAttributes, ReactNode } from "react";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: string | number;
+  children: string | number | ReactNode | any;
   className: string;
 }
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "../Molecules/Input/Input";
 import { VisibilityOffOutlined, VisibilityOutlined } from "@mui/icons-material";
 import Link from "next/link";
@@ -8,13 +8,31 @@ import Image from "next/image";
 import fetchApi from "../Atoms/fetchApi";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 export default function Login() {
   const [emailUsername, setEmailUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
   const router = useRouter();
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    // Check if there's a "rememberMe" cookie
+    const rememberMeCookie = Cookies.get("rememberMe");
+    if (rememberMeCookie) {
+      // Parse the stored data from the cookie
+      const storedData = JSON.parse(rememberMeCookie);
+      const { user } = storedData;
+
+      // Set the email/username and password from the cookie data
+      setEmailUsername(user.emailUsername);
+      setPassword(user.password);
+      setRememberMe(true);
+    }
+  }, []);
 
   const isEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(
     emailUsername
@@ -22,6 +40,7 @@ export default function Login() {
   const isUsername = /^[a-zA-Z0-9_\- ]+$/.test(emailUsername);
 
   const maxAge = 1 * 24 * 60 * 60;
+  const rememberMeMaxAge = 7 * 24 * 60 * 60;
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -81,6 +100,23 @@ export default function Login() {
         return;
       }
 
+      if (response.ok && rememberMe) {
+        // If Remember Me is checked, set a cookie with the user's email or username
+        Cookies.set(
+          "rememberMe",
+          JSON.stringify({
+            user: {
+              emailUsername,
+              password,
+            },
+          }),
+          {
+            expires: rememberMeMaxAge * 1000,
+            secure: true,
+          }
+        );
+      }
+
       const data = await response.json();
       Cookies.set("jwt", data.token, { expires: maxAge * 1000, secure: true });
       setSuccessMessage("Login successful");
@@ -92,6 +128,9 @@ export default function Login() {
       }
     }
   };
+
+  // console.log("CLIENT ID: ", process.env.GOOGLE_CLIENT_ID as string);
+  // console.log("CLIENT SECRET: ", process.env.GOOGLE_CLIENT_SECRET as string);
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
@@ -131,13 +170,13 @@ export default function Login() {
                 htmlFor='email'
                 className='text-dark dark:text-light text-base'
               >
-                Email
+                Email / Username
               </label>
               <Input
                 id='email'
                 type='text'
                 className={`input ${errorMessage ? "!border-red-500" : ""}`}
-                placeholder='Enter your email'
+                placeholder='Enter email'
                 required
                 value={emailUsername}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -162,7 +201,7 @@ export default function Login() {
                 showIcon={VisibilityOutlined}
                 hideIcon={VisibilityOffOutlined}
                 required
-                placeholder='•••••••••••'
+                placeholder='Enter Password'
                 value={password}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setPassword(e.target.value)
@@ -176,6 +215,8 @@ export default function Login() {
                   type='checkbox'
                   id='rememberMe'
                   className='bg-transparent border-dark dark:border-light'
+                  checked={rememberMe}
+                  onChange={() => setRememberMe(!rememberMe)}
                 />
                 <label
                   htmlFor='rememberMe'
@@ -200,6 +241,7 @@ export default function Login() {
           <div className='w-full pt-2'>
             <Button
               type='button'
+              onClick={() => signIn("google")}
               className='btn bg-transparent border-[2px] border-[#B5AFFF] disabled:bg-dark3 disabled:text-dark2 text-dark dark:text-light/70 text-[.9rem] py-3 hover:scale-[.98] transition-all ease-in-out duration-300'
             >
               Log in with Google
