@@ -89,11 +89,52 @@ const commentData = [
   },
 ];
 
+type MangaDataType = {
+  title: string;
+  img: string;
+  alt: string;
+  authors: {
+    authorName: string;
+    authorLink: string;
+  }[];
+  status: string;
+  lastUpdated: string;
+  views: string;
+  synopsis: string;
+  rating: string;
+  totalVotes: string;
+  genres: {
+    genre: string;
+    genreLink: string;
+  }[];
+  chapters: {
+    chapterTitle: string;
+    chapterViews: string;
+    uploadedDate: string;
+    chapterLink: string;
+  }[];
+};
+
+const initialMangaData: MangaDataType = {
+  title: "",
+  img: "",
+  alt: "",
+  authors: [],
+  status: "",
+  lastUpdated: "",
+  views: "",
+  synopsis: "",
+  rating: "",
+  totalVotes: "",
+  genres: [],
+  chapters: [],
+};
+
 const MangaDetails = () => {
   const router = useRouter();
   const [visibleComments, setVisibleComments] = useState(3);
   const [commentValue, setCommentValue] = useState("");
-  const [mangasData, setMangasData] = useState([]);
+  const [mangasData, setMangasData] = useState<MangaDataType>(initialMangaData);
 
   const loadMoreComments = () => {
     setVisibleComments((prevVisibleComments) => prevVisibleComments + 3);
@@ -206,7 +247,6 @@ const MangaDetails = () => {
                   {/* Manga description */}
                   <div className='flex flex-col gap-y-4 text-[14px] mt-8 mb-5 text-white'>
                     <span className=''>{mangasData?.synopsis}</span>
-                   
                   </div>
                 </div>
 
