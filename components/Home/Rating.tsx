@@ -4,8 +4,15 @@ import Img from "@/public/images/small.png";
 import Img2 from "@/public/images/Rectangle 24.png";
 import { ArrowForward } from "@mui/icons-material";
 import RatingCard from "../Molecules/ratingCard";
+import Cookies from "js-cookie";
 
-const Rating = () => {
+const Rating = ({
+  modalState,
+  handleModal,
+}: {
+  modalState: any;
+  handleModal: any;
+}) => {
   return (
     <div className='grid grid-cols-1 lg:grid-cols-5 place-items-center place-content-center p-4 xl:p-14 my-2 md:my-5 font-montserrat space-y-16'>
       <div className='flex flex-col w-full col-span-1 px-4 justify-center items-center'>
@@ -19,7 +26,14 @@ const Rating = () => {
           </p>
         </div>
 
-        <button className='rating mx-auto group'>
+        <button
+          onClick={() => {
+            if (!Cookies.get("jwt")) {
+              handleModal?.();
+            }
+          }}
+          className='rating mx-auto group'
+        >
           View all
           <ArrowForward />
         </button>

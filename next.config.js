@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  images: {
+    domains: ["res.cloudinary.com", "avt.mkklcdnv6temp.com"],
+  },
   domains: ["lh3.googleusercontent.com"],
   env: {
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
@@ -8,4 +11,22 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = {
+  nextConfig,
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "avt.mkklcdnv6temp.com",
+        port: "",
+        pathname: "/**",
+      },
+    ],
+  },
+};

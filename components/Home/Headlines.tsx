@@ -1,8 +1,15 @@
 import Image from "next/image";
 import React from "react";
 import Profile from "@/public/images/profile.png";
+import Cookies from "js-cookie";
 
-const Headlines = () => {
+const Headlines = ({
+  modalState,
+  handleModal,
+}: {
+  modalState: any;
+  handleModal: any;
+}) => {
   return (
     <center className='space-y-2 my-10'>
       <Image
@@ -13,7 +20,14 @@ const Headlines = () => {
       <p className='text-base sm:text-lg text-dark/95 dark:text-light w-full'>
         Still looking for what to read?
       </p>
-      <button className='px-8 py-4 border-2 border-dashed rounded-md border-main2-brand text-dark/95 dark:text-light'>
+      <button
+        onClick={() => {
+          if (!Cookies.get("jwt")) {
+            handleModal?.();
+          }
+        }}
+        className='px-8 py-4 border-2 border-dashed rounded-md border-main2-brand text-dark/95 dark:text-light'
+      >
         View our entire Libary
       </button>
     </center>

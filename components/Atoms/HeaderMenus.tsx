@@ -217,7 +217,8 @@ export const MobileMenuDropdowns: React.FC<MobileMenuType> = ({
         <div className='gap-y-0'>
           {navItems.menu1.map(({ text, icon: Icon }, index) => {
             return (
-              <MenuItem
+              <Link
+                href={`/account/${text}`}
                 key={index}
                 onClick={handleCloseMenu}
                 className='flex items-center space-x-2 py-4 !my-0 capitalize font-montserrat'
@@ -226,7 +227,7 @@ export const MobileMenuDropdowns: React.FC<MobileMenuType> = ({
                 <span className='text-[.9rem] leading-[0px] text-light'>
                   {text}
                 </span>
-              </MenuItem>
+              </Link>
             );
           })}
         </div>
@@ -236,7 +237,8 @@ export const MobileMenuDropdowns: React.FC<MobileMenuType> = ({
         <div className='gap-y-0'>
           {navItems.menu2.map(({ text, icon: Icon }, index) => {
             return (
-              <MenuItem
+              <Link
+                href={`/account/${text}`}
                 key={index}
                 onClick={handleCloseMenu}
                 className='flex items-center space-x-2 py-4 !my-0 capitalize font-montserrat'
@@ -245,7 +247,7 @@ export const MobileMenuDropdowns: React.FC<MobileMenuType> = ({
                 <span className='text-[.9rem] leading-[0px] text-light'>
                   {text}
                 </span>
-              </MenuItem>
+              </Link>
             );
           })}
         </div>
