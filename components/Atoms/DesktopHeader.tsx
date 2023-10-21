@@ -79,9 +79,7 @@ export default function DesktopHeader() {
                         key={index}
                         className='capitalize w-[50%] !justify-items-start !text-left text-sm font-medium text-light'
                       >
-                        <Link href={data.link}>
-                          {data.text}
-                        </Link>
+                        <Link href={data.link}>{data.text}</Link>
                       </li>
                     );
                   })}
@@ -96,9 +94,7 @@ export default function DesktopHeader() {
                         key={index}
                         className='capitalize w-[50%] text-sm font-medium text-light'
                       >
-                        <Link href={data.link}>
-                          {data.text}
-                        </Link>
+                        <Link href={data.link}>{data.text}</Link>
                       </li>
                     );
                   })}
@@ -197,7 +193,8 @@ export default function DesktopHeader() {
                 </div>
                 {DesktopAccountMenuData.map(({ text, icon: Icon }, index) => {
                   return (
-                    <div
+                    <Link
+                      href={`/account/${text}`}
                       key={index}
                       className={`menuItems !text-white hover:!text-gray-200 py-3 last:!pb-0 ${
                         text === "history" || text === "my account"
@@ -207,7 +204,7 @@ export default function DesktopHeader() {
                     >
                       <Icon />
                       <span>{text}</span>
-                    </div>
+                    </Link>
                   );
                 })}
               </div>

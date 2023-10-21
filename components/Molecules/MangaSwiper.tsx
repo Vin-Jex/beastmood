@@ -1,5 +1,5 @@
 import { ArrowForward, ArrowForwardIos } from "@mui/icons-material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image, { StaticImageData } from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper/modules";
@@ -7,6 +7,9 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { useRouter } from "next/router";
+import Cookies from "js-cookie";
+import { BASE_URL } from "../Atoms/fetchApi";
+import Link from "next/link";
 
 export type MangaItemsType = {
   image: string | StaticImageData;
@@ -18,19 +21,45 @@ export type MangaItemsType = {
 export interface MangeSwiperProps {
   title: string;
   subtitle?: string;
-  items: MangaItemsType[];
   navigationLink: string;
   pagination: boolean;
+  modalState?: any;
+  handleModal?: any;
+  parameter?: any;
 }
-
 export default function MangaSwiper({
   title,
   subtitle,
-  items,
   navigationLink,
   pagination,
+  modalState,
+  handleModal,
+  parameter,
 }: MangeSwiperProps) {
   const router = useRouter();
+  const [mangasData, setMangasData] = useState([]);
+
+  useEffect(() => {
+    fetchManga();
+  }, []);
+
+  const fetchManga = async () => {
+    const apiUrl = parameter
+      ? `${BASE_URL}/get_external_mangas${parameter}`
+      : `${BASE_URL}/get_external_mangas`;
+    try {
+      const response = await fetch(apiUrl);
+      const responseData = await response.json();
+
+      if (!response.ok) {
+        console.log("Response: ", responseData);
+      }
+
+      setMangasData(responseData.data[0].data);
+    } catch (error) {
+    } finally {
+    }
+  };
 
   const modules = pagination ? [Navigation, Pagination] : [Navigation];
   return (
@@ -43,7 +72,11 @@ export default function MangaSwiper({
 
         <button
           onClick={() => {
-            router.push(navigationLink ? navigationLink : "");
+            if (!Cookies.get("jwt")) {
+              handleModal?.();
+            } else {
+              router.push(navigationLink ? navigationLink : "");
+            }
           }}
         >
           <span className='hidden md:block'>See all</span>
@@ -99,22 +132,30 @@ export default function MangaSwiper({
         }}
         className='mySwiper'
       >
-        {items?.map(({ image, title, dateRelease, genre }, index) => {
-          return (
-            <SwiperSlide className='mb-16' key={index}>
-              <div className='card card-container !mx-0'>
-                <Image src={image} alt={title} />
+        {mangasData?.map(
+          ({ id, img, title, chapter, genre, host_name, views, index }) => {
+            return (
+              <SwiperSlide className='mb-16' key={index}>
+                <Link
+                  href='/mangas/[mangaId]/[host_name]'
+                  as={`/mangas/${id}/${host_name}`}
+                  // href={`/mangas/${id}/${host_name}`}
+                  className='card card-container !mx-0'
+                  key={index}
+                >
+                  <Image width='100000' height='100000' src={img} alt={title} />
 
-                <div>
-                  <span>{title}</span>
-                  <p>{dateRelease}</p>
-                </div>
+                  <div>
+                    <span>{title}</span>
+                    <p>{chapter}</p>
+                  </div>
 
-                <span>{genre}</span>
-              </div>
-            </SwiperSlide>
-          );
-        })}
+                  <span>{views}</span>
+                </Link>
+              </SwiperSlide>
+            );
+          }
+        )}
       </Swiper>
     </div>
   );

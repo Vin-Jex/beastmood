@@ -9,10 +9,31 @@ import Img5 from "@/public/images/Large5.jpg";
 import "swiper/css";
 import "swiper/css/pagination";
 import Image from "next/image";
+import Cookies from "js-cookie";
+import { BASE_URL } from "../Atoms/fetchApi";
 
 const images = [Img1, Img2, Img3, Img4, Img5];
 
-export default function Hero() {
+export default function Hero({
+  modalState,
+  handleModal,
+}: {
+  modalState: any;
+  handleModal: any;
+}) {
+  const fetchManga = async () => {
+    try {
+      const response = await fetch(`${BASE_URL}/get_external_mangas`);
+      const responseData = await response.json();
+
+      if (!response.ok) {
+        console.log()
+      }
+    } catch (error) {
+    } finally {
+    }
+  };
+
   return (
     <div className='bg-blue-100 relative w-full'>
       <Swiper
@@ -54,7 +75,14 @@ export default function Hero() {
                   as One Piece.
                 </p>
                 <div className='flex gap-x-4 md:gap-x-8 !mt-10'>
-                  <button className='flex items-center gap-x-3 bg-main-brand text-white text-sm md:text-base font-medium capitalize px-8 py-3.5 rounded-md w-fit'>
+                  <button
+                    onClick={() => {
+                      if (!Cookies.get("jwt")) {
+                        handleModal?.();
+                      }
+                    }}
+                    className='flex items-center gap-x-3 bg-main-brand text-white text-sm md:text-base font-medium capitalize px-8 py-3.5 rounded-md w-fit'
+                  >
                     <svg
                       xmlns='http://www.w3.org/2000/svg'
                       className='w-[17px] md:w-[20px]'
@@ -68,7 +96,14 @@ export default function Hero() {
                     </svg>
                     Read
                   </button>
-                  <button className='flex items-center gap-x-3 bg-main2-brand text-sm md:text-base text-dark font-medium capitalize px-8 py-3.5 rounded-md w-fit'>
+                  <button
+                    onClick={() => {
+                      if (!Cookies.get("jwt")) {
+                        handleModal?.();
+                      }
+                    }}
+                    className='flex items-center gap-x-3 bg-main2-brand text-sm md:text-base text-dark font-medium capitalize px-8 py-3.5 rounded-md w-fit'
+                  >
                     <svg
                       xmlns='http://www.w3.org/2000/svg'
                       className='w-[18px] md:w-[21px] mt-0.5 md:mt-1'

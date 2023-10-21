@@ -2,8 +2,15 @@ import React from "react";
 import SpecialsSidenav from "./SpecialsSidenav";
 import image from "@/public/images/Parasyte-small.png";
 import Image from "next/image";
+import Cookies from "js-cookie";
 
-export default function Specials() {
+export default function Specials({
+  modalState,
+  handleModal,
+}: {
+  modalState: any;
+  handleModal: any;
+}) {
   return (
     <div className='p-5 xs:p-2 sm:p-10 my-2 md:my-5'>
       <div className='flex flex-col items-center justify-center'>
@@ -103,7 +110,14 @@ export default function Specials() {
               <span>Genre | Sub</span>
             </div>
           </div>
-          <button className='p-3 md:p-4 rounded-md text-base text-center text-white bg-gradient-to-r from-[#FF5E03] to-[#FFD64E] w-[89%] md:w-full'>
+          <button
+            onClick={() => {
+              if (!Cookies.get("jwt")) {
+                handleModal?.();
+              }
+            }}
+            className='p-3 md:p-4 rounded-md text-base text-center text-white bg-gradient-to-r from-[#FF5E03] to-[#FFD64E] w-[89%] md:w-full'
+          >
             See More
           </button>
         </div>

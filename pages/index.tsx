@@ -12,8 +12,12 @@ import Subscricbe from "@/components/Home/Subscribe";
 import Headlines from "@/components/Home/Headlines";
 import Footer from "@/components/Layout/Footer/Footer";
 import Layout from "@/components/Layout/Layout";
-import MangaSwiper, { MangaItemsType } from "@/components/Molecules/MangaSwiper";
+import MangaSwiper, {
+  MangaItemsType,
+} from "@/components/Molecules/MangaSwiper";
 import Img1 from "@/public/images/Onepiece-small-1.png";
+import LoginPopup from "@/components/Molecules/LoginPopup";
+import { useState } from "react";
 
 export const swipData: MangaItemsType[] = [
   {
@@ -91,27 +95,45 @@ export const swipData: MangaItemsType[] = [
 ];
 
 export default function Home() {
+  const [modalState, setModalState] = useState<{
+    openCategoryModal: boolean;
+    warningModal: boolean;
+  }>({
+    openCategoryModal: false,
+    warningModal: false,
+  });
+  const handleModal = () => {
+    setModalState((prevState) => ({
+      ...prevState,
+      openCategoryModal: !prevState.openCategoryModal,
+    }));
+  };
+
   return (
     <Layout>
-      <Hero />
+      <LoginPopup handleModal={handleModal} modalState={modalState} />
+      <Hero handleModal={handleModal} modalState={modalState} />
       <MangaSwiper
+        handleModal={handleModal}
+        modalState={modalState}
         title='Latest Release'
         subtitle='Checkout the latest and trending collections'
-        items={swipData}
         navigationLink='/mangas/'
         pagination={true}
       />
-      <Specials />
-      <Rating />
-      <Features />
+      <Specials handleModal={handleModal} modalState={modalState} />
+      <Rating handleModal={handleModal} modalState={modalState} />
+      <Features handleModal={handleModal} modalState={modalState} />
       <MangaSwiper
+        handleModal={handleModal}
+        modalState={modalState}
         title='popular reads'
-        items={swipData}
+        parameter='?orby=topview'
         navigationLink='/mangas/'
         pagination={false}
       />
       <Subscricbe />
-      <Headlines />
+      <Headlines handleModal={handleModal} modalState={modalState} />
     </Layout>
   );
 }

@@ -10,6 +10,7 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { signIn, signOut, useSession } from "next-auth/react";
 
+export const maxAge = 1 * 24 * 60 * 60;
 export default function Login() {
   const [emailUsername, setEmailUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -39,7 +40,6 @@ export default function Login() {
   );
   const isUsername = /^[a-zA-Z0-9_\- ]+$/.test(emailUsername);
 
-  const maxAge = 1 * 24 * 60 * 60;
   const rememberMeMaxAge = 7 * 24 * 60 * 60;
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -76,11 +76,13 @@ export default function Login() {
     }
 
     let payload: any = {};
+    Cookies.set("email", emailUsername);
+    
 
     if (isEmail) {
-      payload = { email: emailUsername };
+      payload = { identifier: emailUsername };
     } else {
-      payload = { username: emailUsername };
+      payload = { identifier: emailUsername };
     }
 
     payload.password = password;
@@ -90,13 +92,20 @@ export default function Login() {
         "https://api.beastmoodsee.com/api/v1/auth/login",
         {
           method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "*/*",
+          },
           body: JSON.stringify(payload),
         }
       );
 
       if (!response.ok) {
         const responseData = await response.json();
-        setErrorMessage(responseData.error || "Login failed");
+        setErrorMessage(responseData.message || "Login failed");
+        if (responseData.message === "You need to verify your email first!") {
+          router.push("/auth/verify");
+        }
         return;
       }
 
@@ -119,7 +128,8 @@ export default function Login() {
 
       const data = await response.json();
       Cookies.set("jwt", data.token, { expires: maxAge * 1000, secure: true });
-      setSuccessMessage("Login successful");
+      router.push("/");
+      setSuccessMessage(data.message || "Login successful");
     } catch (error) {
       if (!navigator.onLine) {
         setErrorMessage("Network error: Unable to reach the server");
@@ -128,9 +138,6 @@ export default function Login() {
       }
     }
   };
-
-  // console.log("CLIENT ID: ", process.env.GOOGLE_CLIENT_ID as string);
-  // console.log("CLIENT SECRET: ", process.env.GOOGLE_CLIENT_SECRET as string);
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {

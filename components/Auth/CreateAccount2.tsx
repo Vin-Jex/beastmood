@@ -8,15 +8,33 @@ import { useRouter } from "next/router";
 import AvaterEditingModal from "../Molecules/Modal/AvaterEditingModal";
 import { useFormContext } from "@/context/FormContext";
 import { CircularProgress } from "@mui/material";
+import Cookies from "js-cookie";
+import { maxAge } from "./Login";
 
 const CreateAccount2 = () => {
-  const route = useRouter();
+  const router = useRouter();
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [file, setFile] = useState<string | StaticImageData>(bg);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
-  const { image, setImage, username, setUsername, setFormErrors, formErrors } =
-    useFormContext();
+  const {
+    image,
+    setImage,
+    username,
+    setUsername,
+    setFormErrors,
+    formErrors,
+    email,
+    firstName,
+    lastName,
+    password,
+  } = useFormContext();
+
+  useEffect(() => {
+    setImage(bg.src);
+  }, [])
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -48,15 +66,65 @@ const CreateAccount2 = () => {
       : "Username must start with a letter and can only contain alphanumeric characters, hyphens, and underscores.";
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
+  // const handleSubmit = (e: React.FormEvent) => {
+  //   e.preventDefault();
 
-    setTimeout(() => {
-      // After the operation is completed, navigate to the desired route
-      setIsLoading(false);
-      // route.push("/");
-    }, 10000);
+  // };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    // Reset previous error messages
+    setErrorMessage("");
+    setSuccessMessage("");
+
+    if (!username) {
+      setErrorMessage("Please enter a username.");
+      return;
+    }
+
+    if (!navigator.onLine) {
+      setErrorMessage("No internet connection");
+      return;
+    }
+
+    let payload = {
+      email,
+      username,
+      password,
+      firstName,
+      lastName,
+      avatar: image,
+    };
+
+    try {
+      const response = await fetch(
+        "https://api.beastmoodsee.com/api/v1/auth/signup/user",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "*/*",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      if (!response.ok) {
+        const responseData = await response.json();
+        setErrorMessage(responseData.error || "Registration failed.");
+        return;
+      }
+
+      const data = await response.json();
+      router.push("/");
+      setSuccessMessage(data.message || "Registration successful");
+    } catch (error) {
+      if (!navigator.onLine) {
+        setErrorMessage("Network error: Unable to reach the server");
+      } else {
+        console.error("Error Fetching: ", error);
+      }
+    }
   };
 
   return (

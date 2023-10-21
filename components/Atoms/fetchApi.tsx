@@ -1,4 +1,4 @@
-const BASE_URL = "https://api.beastmoodsee.com";
+export const BASE_URL = "https://api.beastmoodsee.com/api/v1";
 
 const HEADERS: Record<string, string> = {
   "Content-Type": "application/json",

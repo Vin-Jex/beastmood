@@ -7,6 +7,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { ArrowForward, FavoriteBorderSharp } from "@mui/icons-material";
+import Cookies from "js-cookie";
 
 const swipData = [
   {
@@ -83,7 +84,13 @@ const swipData = [
   },
 ];
 
-const Features = () => {
+const Features = ({
+  modalState,
+  handleModal,
+}: {
+  modalState: any;
+  handleModal: any;
+}) => {
   return (
     <div className='p-2 md:p-8 xl:p-10 2xl:p-14'>
       <div className='w-full h-full min-h-[400px] rounded-lg bg-gradient-to-r from-[#FF5E03] to-[#FFD601] py-6 px-4 md:py-6 md:px-6 xl:py-10 xl:px-10 2xl:px-10 2xl:py-10 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-9 place-items-center place-content-center gap-y-6'>
@@ -98,7 +105,14 @@ const Features = () => {
             Saitama, a superhero who, because he can defeat any opponent with a
             single punch, grows bored from a lack of challenge.
           </p>
-          <button className='rating !text-white text-base hover:!text-dark dark:border-[#FFD64E] border-[#FFD64E] !px-4 xl:!px-6 2xl:!px-8'>
+          <button
+            onClick={() => {
+              if (!Cookies.get("jwt")) {
+                handleModal?.();
+              }
+            }}
+            className='rating !text-white text-base hover:!text-dark dark:border-[#FFD64E] border-[#FFD64E] !px-4 xl:!px-6 2xl:!px-8'
+          >
             All Seasons
             <ArrowForward />
           </button>
