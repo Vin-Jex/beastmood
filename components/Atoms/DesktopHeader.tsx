@@ -13,6 +13,9 @@ import {
   ModeNight,
   SearchOutlined,
 } from "@mui/icons-material";
+import Button from "../Molecules/Input/Button";
+import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 
 export default function DesktopHeader() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,6 +23,8 @@ export default function DesktopHeader() {
   const { theme, setTheme } = useTheme();
   const [addAnimate, setAddAnimate] = useState(false);
   const [themeColor, setThemeColor] = useState(true);
+
+  const router = useRouter();
 
   useEffect(() => {
     setMounted(true);
@@ -56,7 +61,7 @@ export default function DesktopHeader() {
         </Link>
       </div>
       <div className='w-full flex items-center justify-between'>
-        <ul className='block ml-10'>
+        <ul className='block ml-10 w-full'>
           <div className='inline-block group relative'>
             <li className='inline-block items-center cursor-pointer leading-5 px-5 capitalize text-base text-light hover:text-gray-100/95'>
               category
@@ -114,7 +119,7 @@ export default function DesktopHeader() {
           })}
         </ul>
 
-        <div className='flex items-center space-x-5 cursor-pointer'>
+        <div className='flex items-center space-x-5 cursor-pointer !w-fit'>
           <div
             onClick={() => {
               handletoggle();
@@ -147,69 +152,87 @@ export default function DesktopHeader() {
             className='cursor-pointer'
             sx={{ fontSize: "1.7rem" }}
           />
-
-          <BookmarkBorderOutlined
-            className='cursor-pointer'
-            sx={{ fontSize: "1.7rem" }}
-          />
-
-          {/* Account Menu */}
-          <div className='group relative'>
-            <div className='flex items-center cursor-pointer'>
-              <span
-                className='w-9 h-9 border rounded-full overflow-hidden'
-                title='Account Settings'
-              >
-                <Image
-                  className='object-cover'
-                  src={ProfileImage}
-                  alt='Profile'
-                />
-              </span>
-              <KeyboardArrowDown
-                className='mt-0 group-hover:-rotate-180 group-hover:mt-0.5 transition ease-in-out duration-300'
-                sx={{ fontSize: "1.8rem", marginTop: "0.3rem", color: "#fff" }}
+          {!Cookies.get("jwt") ? (
+            <Button
+              type='button'
+              className='btn mx-auto min-h-[40px] sm:min-h-[44px] w-fit whitespace-nowrap bg-dark text-light/90 text-[.79rem] sm:text-[.8rem] px-8 !py-2 hover:scale-[.98] transition-all ease-in-out duration-300 capitalize relative !cursor-pointer'
+              onClick={() => {
+                router.push("/auth/login");
+              }}
+            >
+              Login
+            </Button>
+          ) : (
+            <>
+              <BookmarkBorderOutlined
+                className='cursor-pointer'
+                sx={{ fontSize: "1.7rem" }}
               />
-            </div>
-
-            {/* Popover menu */}
-            <div className='absolute top-[2.9rem] right-0 hidden group-hover:md:block hover:md:block bg-[#FF5E03] text-white w-[22rem]  animate-fade-in  overflow-visible shadow-[0px_10px_80px_rgba(0,_0,_0,_0.32)] rounded-md'>
-              <div className='-mt-[.45rem]'>
-                <div
-                  className='w-5 h-5 right-[2rem] absolute 
-                   bg-[#FF5E03] rotate-45'
-                ></div>
-              </div>
-              <div className='px-6 py-8'>
-                <div className='flex items-center space-x-3 pb-4 my-auto'>
-                  <span className='w-10 h-10 border rounded-full overflow-hidden'>
+              {/* Account Menu */}
+              <div className='group relative'>
+                <div className='flex items-center cursor-pointer'>
+                  <span
+                    className='w-9 h-9 border rounded-full overflow-hidden'
+                    title='Account Settings'
+                  >
                     <Image
-                      className='object-cover '
+                      className='object-cover'
                       src={ProfileImage}
                       alt='Profile'
                     />
                   </span>
-                  <p className='text-[1.1rem] text-white mt-1'>Beastmood</p>
+                  <KeyboardArrowDown
+                    className='mt-0 group-hover:-rotate-180 group-hover:mt-0.5 transition ease-in-out duration-300'
+                    sx={{
+                      fontSize: "1.8rem",
+                      marginTop: "0.3rem",
+                      color: "#fff",
+                    }}
+                  />
                 </div>
-                {DesktopAccountMenuData.map(({ text, icon: Icon }, index) => {
-                  return (
-                    <Link
-                      href={`/account/${text}`}
-                      key={index}
-                      className={`menuItems !text-white hover:!text-gray-200 py-3 last:!pb-0 ${
-                        text === "history" || text === "my account"
-                          ? "!mb-4"
-                          : ""
-                      }`}
-                    >
-                      <Icon />
-                      <span>{text}</span>
-                    </Link>
-                  );
-                })}
+
+                {/* Popover menu */}
+                <div className='absolute top-[2.9rem] right-0 hidden group-hover:md:block hover:md:block bg-[#FF5E03] text-white w-[22rem]  animate-fade-in  overflow-visible shadow-[0px_10px_80px_rgba(0,_0,_0,_0.32)] rounded-md'>
+                  <div className='-mt-[.45rem]'>
+                    <div
+                      className='w-5 h-5 right-[2rem] absolute 
+                   bg-[#FF5E03] rotate-45'
+                    ></div>
+                  </div>
+                  <div className='px-6 py-8'>
+                    <div className='flex items-center space-x-3 pb-4 my-auto'>
+                      <span className='w-10 h-10 border rounded-full overflow-hidden'>
+                        <Image
+                          className='object-cover '
+                          src={ProfileImage}
+                          alt='Profile'
+                        />
+                      </span>
+                      <p className='text-[1.1rem] text-white mt-1'>Beastmood</p>
+                    </div>
+                    {DesktopAccountMenuData.map(
+                      ({ text, icon: Icon }, index) => {
+                        return (
+                          <Link
+                            href={`/account/${text}`}
+                            key={index}
+                            className={`menuItems !text-white hover:!text-gray-200 py-3 last:!pb-0 ${
+                              text === "history" || text === "my account"
+                                ? "!mb-4"
+                                : ""
+                            }`}
+                          >
+                            <Icon />
+                            <span>{text}</span>
+                          </Link>
+                        );
+                      }
+                    )}
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
+            </>
+          )}
         </div>
         {/* Search Modal */}
         <>
