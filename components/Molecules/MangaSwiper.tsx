@@ -135,23 +135,52 @@ export default function MangaSwiper({
         {mangasData?.map(
           ({ id, img, title, chapter, genre, host_name, views, index }) => {
             return (
-              <SwiperSlide className='mb-16' key={index}>
-                <Link
-                  href='/mangas/[mangaId]/[host_name]'
-                  as={`/mangas/${id}/${host_name}`}
-                  // href={`/mangas/${id}/${host_name}`}
-                  className='card card-container !mx-0'
-                  key={index}
-                >
-                  <Image width='100000' height='100000' src={img} alt={title} />
-
-                  <div>
-                    <span>{title}</span>
-                    <p>{chapter}</p>
+              <SwiperSlide
+                onClick={() => {
+                  if (!Cookies.get("jwt")) {
+                    handleModal?.();
+                  }
+                }}
+                className='mb-16'
+                key={index}
+              >
+                {!Cookies.get("jwt") ? (
+                  <div className='card card-container !mx-0 cursor-pointer'>
+                    <Image
+                      width='100000'
+                      height='100000'
+                      src={img}
+                      alt={title}
+                    />
+                    <div>
+                      <span>{title}</span>
+                      <p>{chapter}</p>
+                    </div>
+                    <span>{views}</span>
                   </div>
+                ) : (
+                  <Link
+                    href='/mangas/[mangaId]/[host_name]'
+                    as={`/mangas/${id}/${host_name}`}
+                    // href={`/mangas/${id}/${host_name}`}
+                    className='card card-container !mx-0'
+                    key={index}
+                  >
+                    <Image
+                      width='100000'
+                      height='100000'
+                      src={img}
+                      alt={title}
+                    />
 
-                  <span>{views}</span>
-                </Link>
+                    <div>
+                      <span>{title}</span>
+                      <p>{chapter}</p>
+                    </div>
+
+                    <span>{views}</span>
+                  </Link>
+                )}
               </SwiperSlide>
             );
           }
