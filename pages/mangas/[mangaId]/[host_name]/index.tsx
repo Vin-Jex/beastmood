@@ -135,18 +135,18 @@ const MangaDetails = () => {
   const [visibleComments, setVisibleComments] = useState(3);
   const [commentValue, setCommentValue] = useState("");
   const [mangasData, setMangasData] = useState<MangaDataType>(initialMangaData);
+  const { host_name, mangaId } = router.query;
 
   const loadMoreComments = () => {
     setVisibleComments((prevVisibleComments) => prevVisibleComments + 3);
   };
 
   useEffect(() => {
-    const { host_name, mangaId } = router.query;
     fetchManga(mangaId as string, host_name as string);
-  }, [router.query]);
+  }, [host_name, mangaId, router.query]);
 
   const fetchManga = async (mangaId: string, host_name: string) => {
-    console.log("Hostname: ", mangaId);
+    // console.log("Hostname: ", mangaId);
     try {
       const apiUrl = `${BASE_URL}/get_external_manga_details?id=${mangaId}`;
       const response = await fetch(apiUrl, {
@@ -163,10 +163,11 @@ const MangaDetails = () => {
         console.log("Response: ", responseData);
       }
 
+      console.log("Response: ", responseData);
       setMangasData(responseData.data[0]);
     } catch (error) {
     } finally {
-      console.log("Data: ", mangasData);
+      // console.log("Data: ", mangasData);
     }
   };
 
@@ -177,22 +178,31 @@ const MangaDetails = () => {
         <div
           className={`flex items-center justify-center w-full h-full min-h-[864px] max-h-screen backdrop-blur-md bg-black/[79%] relative`}
         >
-          <Image
-            src={mangasData?.img || image}
-            alt='backgroundImage'
-            width='100000'
-            height='100000'
-            className='object-cover w-full h-full -z-20 absolute top-0'
-          />
+          <picture>
+            <source srcSet={mangasData?.img} type='image/*' />
+            <source srcSet={mangasData?.img} type='image/*' />
+            <img
+              src={mangasData?.img}
+              alt='backgroundImage'
+              width='100000'
+              height='100000'
+              className='object-cover w-full h-full -z-20 absolute top-0'
+            />
+          </picture>
+
           <div className='flex backdrop-blur-md w-full h-full !bg-black/[79%] px-[72px] absolute top-0'>
             <div className='flex w-full gap-6 pt-[92px] px-7'>
-              <Image
-                src={mangasData?.img || image}
-                alt={mangasData?.title}
-                width='100000'
-                height='100000'
-                className='w-[196px] h-[284px]'
-              />
+              <picture>
+                <source srcSet={mangasData?.img} type='image/*' />
+                <source srcSet={mangasData?.img} type='image/*' />
+                <img
+                  src={mangasData?.img}
+                  alt={mangasData?.title}
+                  width='100000'
+                  height='100000'
+                  className='w-[196px] h-[284px]'
+                />
+              </picture>
               <div className='flex flex-col'>
                 <div className='flex flex-col'>
                   <span className='text-white/40 text-sm font-medium capitalize'>
@@ -259,18 +269,18 @@ const MangaDetails = () => {
               </div>
             </div>
 
-            <div className='flex flex-col items-center py-14 px-7 w-full h-full max-w-[410px] min-w-[410px] bg-white/50 text-white text-sm font-medium'>
-              Japanese: ONE PIECE <br /> <br />
-              Synonyms: OP Aired: Oct 20, 1999 to ? <br /> <br />
-              Premiered: Fall 1999 <br /> <br />
-              Duration: 24m <br /> <br />
-              Status: Currently Ongoing MAL <br /> <br />
-              Score: 8.62 <br /> <br />
-              Genres: Action Adventure Comedy Drama Fantasy Shounen <br />{" "}
-              <br />
-              Super Power Studios: Toei Animation <br /> <br />
-              Producers: Fuji TV, TAP, Shueisha, Toei Animation, Funimation,
-              4Kids Entertainment <br /> <br />
+            <div className='flex flex-col py-14 px-7 w-full h-full max-w-[410px] min-w-[410px] bg-white/50 text-white text-sm font-medium'>
+              Title: {mangasData?.title} <br /> <br />
+              Japanese: {mangasData?.alt?.split(" ;")?.[1]} <br /> <br />
+              Views: {mangasData?.views} <br /> <br />
+              Rating: {mangasData?.rating}
+              <br /> <br />
+              Status: {mangasData?.status} <br /> <br />
+              Total Votes: {mangasData?.totalVotes} <br /> <br />
+              Genres: {mangasData?.genres
+                ?.map((item) => item.genre)
+                .join(", ")}{" "}
+              <br /> <br />
             </div>
           </div>
         </div>
@@ -278,39 +288,26 @@ const MangaDetails = () => {
         <div className='flex flex-col px-[72px] py-14'>
           <div className='flex flex-col justify-center'>
             <span className='font-bold text-black dark:text-white text-2xl capitalize'>
-              1064 CHAPTERS
+              {mangasData?.chapters?.length} CHAPTERS
             </span>
             <span className='text-main2-brand dark:text-main2-brand/80 text-sm first-letter:capitalize'>
-              Last updated 10hrs ago
+              Last updated {mangasData?.lastUpdated}
             </span>
           </div>
           <div className='flex justify-between gap-x-24 w-full h-full my-10'>
-            <div className='flex flex-col w-full max-w-[932px] max-h-[1200px] gap-4 py-4 px-4 bg-[#F3F3F3] overflow-y-scroll'>
-              <Chapters volume='volume 1' date='27th of jun 2022' />
-              <Chapters volume='volume 1' date='27th of jun 2022' />
-              <Chapters volume='volume 1' date='27th of jun 2022' />
-              <Chapters volume='volume 1' date='27th of jun 2022' />
-              <Chapters volume='volume 1' date='27th of jun 2022' />
-              <Chapters volume='volume 1' date='27th of jun 2022' />
-              <Chapters volume='volume 1' date='27th of jun 2022' />
-              <Chapters volume='volume 1' date='27th of jun 2022' />
-              <Chapters volume='volume 1' date='27th of jun 2022' />
-              <Chapters volume='volume 1' date='27th of jun 2022' />
-              <Chapters volume='volume 1' date='27th of jun 2022' />
-              <Chapters volume='volume 1' date='27th of jun 2022' />
-              <Chapters volume='volume 1' date='27th of jun 2022' />
-              <Chapters volume='volume 1' date='27th of jun 2022' />
-              <Chapters volume='volume 1' date='27th of jun 2022' />
-              <Chapters volume='volume 1' date='27th of jun 2022' />
-              <Chapters volume='volume 1' date='27th of jun 2022' />
-              <Chapters volume='volume 1' date='27th of jun 2022' />
-              <Chapters volume='volume 1' date='27th of jun 2022' />
-              <Chapters volume='volume 1' date='27th of jun 2022' />
-              <Chapters volume='volume 1' date='27th of jun 2022' />
-              <Chapters volume='volume 1' date='27th of jun 2022' />
-              <Chapters volume='volume 1' date='27th of jun 2022' />
-              <Chapters volume='volume 1' date='27th of jun 2022' />
-              <Chapters volume='volume 1' date='27th of jun 2022' />
+            <div className='flex flex-col w-full max-w-[932px] h-fit max-h-[1200px] gap-4 py-4 px-4 bg-[#F3F3F3] overflow-y-scroll'>
+              {mangasData?.chapters?.map((chapter, index) => {
+                return (
+                  <Chapters
+                    key={index}
+                    volume={chapter?.chapterTitle || ""}
+                    date={chapter?.uploadedDate || ""}
+                    id={mangaId || ""}
+                    host_name={host_name || ""}
+                    chapter_url={chapter?.chapterLink}
+                  />
+                );
+              })}
             </div>
             <div className='flex flex-col max-w-[413px] min-w-[413px]'>
               <span className='text-black dark:text-white text-xl first-letter:capitalize'>
