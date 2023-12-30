@@ -2,7 +2,12 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["res.cloudinary.com", "avt.mkklcdnv6temp.com"],
+    domains: [
+      "res.cloudinary.com",
+      "avt.mkklcdnv6temp.com",
+      "bumn2.mkklcdnv6temp.com",
+      "imagesfull.mgicdn.com",
+    ],
   },
   domains: ["lh3.googleusercontent.com"],
   env: {
@@ -24,6 +29,18 @@ module.exports = {
       {
         protocol: "https",
         hostname: "avt.mkklcdnv6temp.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "bumn2.mkklcdnv6temp.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "imagesfull.mgicdn.com",
         port: "",
         pathname: "/**",
       },

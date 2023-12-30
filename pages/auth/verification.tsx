@@ -6,11 +6,10 @@ const Verification = () => {
   const [dots, setDots] = useState(".");
   const [message, setMessage] = useState(`Verifying User ${dots}`);
   const router = useRouter();
-  
+
   const { email, token } = router.query;
-  
+
   useEffect(() => {
-    // console.log("Query: " + JSON.stringify(router.query));
     const verify = async () => {
       if (email && token) {
         try {
@@ -31,9 +30,14 @@ const Verification = () => {
             }
           } else {
             const responseData = await response.json();
+
+            if (responseData.message === "Email already verified!")
+              setMessage(responseData?.message || "Email already verified!.");
             setMessage(
               responseData?.message || "Email verification completed."
             );
+
+            router.replace("/");
           }
         } catch (error) {
           setMessage((error as string) || "Email verification failed");
@@ -45,7 +49,7 @@ const Verification = () => {
     };
 
     verify();
-  }, [email, router.query, token]);
+  }, [email, token]);
 
   useEffect(() => {
     const interval = setInterval(() => {
